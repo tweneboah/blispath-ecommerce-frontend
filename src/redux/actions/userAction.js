@@ -1,9 +1,5 @@
 import axios from 'axios';
-import {
-  FILE_UPLOAD_FAIL,
-  FILE_UPLOAD_REQUEST,
-  FILE_UPLOAD_SUCCESS,
-} from '../actionTypes/fileUploadActionTypes';
+
 import {
   USER_DETAILS_FAIL,
   PASSWORD_RESET_FAIL,
@@ -31,7 +27,7 @@ import {
   PASSWORD_RESET_UPDATE_SUCCESS,
   PASSWORD_RESET_UPDATE_FAIL,
 } from '../actionTypes/userSctionTypes';
-
+import baseURL from '../../utils/baseURL.js';
 //=====================
 //=====LOGIN
 //=====================
@@ -46,7 +42,7 @@ export const loginAction = (email, password) => async dispatch => {
       },
     };
     const { data } = await axios.post(
-      '/api/users/login',
+      `${baseURL}/api/users/login`,
       { email, password },
       config
     );
@@ -94,7 +90,7 @@ export const registerAction = (name, email, password) => async dispatch => {
       },
     };
     const { data } = await axios.post(
-      '/api/users/register',
+      `${baseURL}/api/users/register`,
       { name, email, password },
       config
     );
@@ -139,7 +135,7 @@ export const getUserDetailsAction = id => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/users/${id}`, config);
+    const { data } = await axios.get(`${baseURL}/api/users/${id}`, config);
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data,
@@ -180,7 +176,7 @@ export const updateUserProfileAction = (userId, userData) => async (
       },
     };
     const { data } = await axios.put(
-      `/api/users/profile/${userId}`,
+      `${baseURL}/api/users/profile/${userId}`,
       userData,
       config
     );
@@ -216,7 +212,7 @@ export const passwordResetTokenAction = email => {
       };
 
       const updatePassword = await axios.post(
-        '/api/users/reset-password-request-token',
+        `${baseURL}/api/users/reset-password-request-token`,
         {
           email: email,
         },
@@ -252,7 +248,7 @@ export const updateRequestPasswordAction = (newPassword, passwordToken) => {
       };
 
       const updatePassword = await axios.post(
-        '/api/users/new-password-reset',
+        `${baseURL}/api/users/new-password-reset`,
         {
           password: newPassword,
           token: passwordToken,
@@ -293,7 +289,7 @@ export const fetchAllUsersAction = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/users`, config);
+    const { data } = await axios.get(`${baseURL}/api/users`, config);
 
     dispatch({
       type: USER_LIST_SUCCESS,

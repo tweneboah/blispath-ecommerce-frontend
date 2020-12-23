@@ -124,7 +124,7 @@ const AdminCreateProducts = ({ history }) => {
                           <div class='flex text-sm text-gray-600'>
                             <Dropzone
                               accept='image/jpeg, image/png'
-                              maxFiles='4'
+                              maxFiles={4}
                               onDrop={acceptedFiles => {
                                 props.setFieldValue(
                                   'image',

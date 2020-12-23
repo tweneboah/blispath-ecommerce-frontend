@@ -7,7 +7,7 @@ import {
   MAKE_PAYMENT_REQUEST,
   MAKE_PAYMENT_SUCCESS,
 } from '../actionTypes/paymentActionTypes';
-
+import baseURL from '../../utils/baseURL.js';
 //======================
 //Make payment
 //=======================
@@ -30,7 +30,7 @@ const makePaymentAction = (paystackUrl, paymentDetails) => {
         },
       };
       const { data } = await axios.post(
-        '/api/pay',
+        `${baseURL}/api/pay`,
         { paystackUrl: paystackUrl, paymentDetails },
         config
       );
@@ -69,7 +69,7 @@ const fetchAllPaymentsAction = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/pay`, {}, config);
+    const { data } = await axios.get(`${baseURL}/api/pay`, {}, config);
 
     dispatch({
       type: FETCH_PAYMENT_SUCCESS,

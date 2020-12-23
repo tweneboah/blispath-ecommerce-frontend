@@ -6,6 +6,7 @@ import {
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
 } from '../actionTypes/cartActionTypes';
+import baseURL from '../../utils/baseURL.js';
 
 //The logic
 //This will make request to the backend and fetch the data
@@ -15,7 +16,7 @@ export const addToCart = (id, qty) => {
   //The second argument we pass to dispatch contains all the data in our store
 
   return async (dispatch, getState) => {
-    const { data } = await axios.get(`/api/products/${id}`);
+    const { data } = await axios.get(`${baseURL}/api/products/${id}`);
     dispatch({
       type: CART_ADD_ITEM,
       payload: {

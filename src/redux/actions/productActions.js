@@ -1,5 +1,5 @@
 import axios from 'axios';
-const {
+import {
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
   PRODUCT_LIST_FAIL,
@@ -15,13 +15,15 @@ const {
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_FAIL,
   PRODUCT_DELETE_SUCCESS,
-} = require('../actionTypes/productActionTypes');
-
+} from '../actionTypes/productActionTypes';
+import baseURL from '../../utils/baseURL.js';
 export const fetchAllProductsAction = SearchTerm => {
   return async dispatch => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
-      const { data } = await axios.get(`/api/products?name=${SearchTerm}`);
+      const { data } = await axios.get(
+        `${baseURL}/api/products?name=${SearchTerm}`
+      );
 
       dispatch({
         type: PRODUCT_LIST_SUCCESS,
@@ -51,7 +53,7 @@ export const filterByCategoryAction = category => {
         type: PRODUCT_LIST_REQUEST,
       });
       dispatch({ type: PRODUCT_LIST_REQUEST });
-      const { data } = await axios.get(`/api/products`);
+      const { data } = await axios.get(`${baseURL}/api/products`);
       if (data) {
         const products = data.filter(product => product.category === category);
         dispatch({
@@ -66,7 +68,7 @@ export const productDetailsActions = id => {
   return async dispatch => {
     try {
       dispatch({ type: PRODUCT_DETAILS_REQUEST });
-      const { data } = await axios.get(`/api/products/${id}`);
+      const { data } = await axios.get(`${baseURL}/api/products/${id}`);
 
       dispatch({
         type: PRODUCT_DETAILS_SUCCESS,
@@ -104,6 +106,7 @@ const createProductAction = productData => async (dispatch, getState) => {
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
+        'Access-Control-Allow-Origin': '*',
       },
     };
 
@@ -122,7 +125,11 @@ const createProductAction = productData => async (dispatch, getState) => {
     }
 
     console.log(formProductData.getAll('image'));
-    const { data } = await axios.post(`/api/products`, formProductData, config);
+    const { data } = await axios.post(
+      `${baseURL}/api/products`,
+      formProductData,
+      config
+    );
 
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
@@ -162,7 +169,7 @@ const updateProductAction = (id, productData) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/api/products/update/${id}`,
+      `${baseURL}/api/products/update/${id}`,
       productData,
       config
     );
@@ -205,7 +212,7 @@ const deleteProductAction = id => async (dispatch, getState) => {
     };
 
     const { data } = await axios.delete(
-      `/api/products/delete/${id}`,
+      `${baseURL}/api/products/delete/${id}`,
       {},
       config
     );

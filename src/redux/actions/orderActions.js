@@ -20,6 +20,7 @@ import {
   UPDATE_ORDER_TO_DELIVERED_REQUEST,
 } from '../actionTypes/orderActionTypes';
 import { loginAction } from '../actions/userAction';
+import baseURL from '../../utils/baseURL.js';
 
 const createOrderAction = order => async (dispatch, getState) => {
   //Since this is need authentication we have to grab the user token from store
@@ -38,7 +39,7 @@ const createOrderAction = order => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/orders`, order, config);
+    const { data } = await axios.post(`${baseURL}/api/orders`, order, config);
 
     dispatch({
       type: ORDER_CREATE_SUCCESS,
@@ -80,7 +81,7 @@ const getOrderDetailsActon = id => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders/${id}`, config);
+    const { data } = await axios.get(`${baseURL}/api/orders/${id}`, config);
 
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
@@ -122,7 +123,7 @@ const payOrderAction = (orderId, paymentResult) => async (
     };
 
     const { data } = await axios.put(
-      `/api/orders/${orderId}/pay`,
+      `${baseURL}/api/orders/${orderId}/pay`,
       paymentResult,
       config
     );
@@ -164,7 +165,7 @@ const updateTodeliverOrderAction = orderId => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/api/orders/update-order-to-delivered/${orderId}`,
+      `${baseURL}/api/orders/update-order-to-delivered/${orderId}`,
       {},
       config
     );
@@ -204,7 +205,7 @@ const myOrdersListAction = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders/myorders`, config);
+    const { data } = await axios.get(`${baseURL}/api/orders/myorders`, config);
 
     dispatch({
       type: ORDER_LIST_MY_SUCCESS,
@@ -242,7 +243,7 @@ const fetchAllOrdersAction = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders`, config);
+    const { data } = await axios.get(`${baseURL}/api/orders`, config);
 
     dispatch({
       type: FETCH_ALL_ORDERS_SUCCESS,
