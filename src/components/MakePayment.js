@@ -15,7 +15,7 @@ const MakePayment = ({ location, history, match }) => {
     email: userEmail,
     amount: Math.ceil(totalAmount) * 100, //Convert the amount to a whole number
     fullName: 'Emmanuel Tweneboah',
-    callback_url: `${baseURL}/profile`,
+
     metadata: { custom_fields: orderId },
   };
 
