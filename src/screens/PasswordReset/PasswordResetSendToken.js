@@ -17,7 +17,7 @@ const PasswordResetSendToken = () => {
         onSubmit={values => dispatch(passwordResetTokenAction(values.email))}>
         {props => {
           return (
-            <div className='min-h-1/2 bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
+            <div className='h-screen bg-gray-500 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
               <div className='sm:mx-auto sm:w-full sm:max-w-md'>
                 <h2 className='mt-6 text-center text-xl font-extrabold text-gray-900'>
                   Enter your email
@@ -38,7 +38,7 @@ const PasswordResetSendToken = () => {
               </div>
 
               <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-                <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
+                <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 ml-3 mr-3'>
                   <form className='space-y-6' onSubmit={props.handleSubmit}>
                     <div>
                       <label
@@ -63,7 +63,7 @@ const PasswordResetSendToken = () => {
                     <div>
                       <button
                         type='submit'
-                        className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                        className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                         Reset Password
                       </button>
                     </div>

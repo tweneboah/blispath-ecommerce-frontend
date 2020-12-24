@@ -3,9 +3,11 @@ import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CategoriesWithLogo from '../components/Categories/CategoriesWithLogo';
+import ErrorMessage from '../components/ErrorMessage';
 import HomeBanner from '../components/HomeBanner';
 import HomePageSections from '../components/HomePageSections';
 import Loader from '../components/Loader';
+import Loading from '../components/Loading';
 import Message from '../components/Message';
 import Product from '../components/Product';
 import Ratings from '../components/Ratings';
@@ -30,7 +32,7 @@ const HomeScreen = () => {
     <>
       <HomeBanner />
 
-      <div class='relative bg-gray-200 pt-16 -ml-9 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8'>
+      <div class='relative bg-gray-200 pt-16  pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8'>
         <div class='relative max-w-7xl mx-auto'>
           <div class='text-center'>
             <h2 class='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
@@ -45,13 +47,14 @@ const HomeScreen = () => {
               <input
                 onChange={e => dispatch(fetchAllProductsAction(e.target.value))}
                 type='text'
-                class='py-2 bg-gray-100 px-3 text-center border shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-1/4 sm:text-sm border-gray-500 rounded-md'
+                class='py-3 bg-gray-100 px-3 text-center border  focus:ring-indigo-500 focus:border-indigo-500 block w-1/2 sm:text-sm border-gray-500 rounded-md'
                 placeholder='Search for product'
               />
             </div>
             {/* Logo categories */}
             <CategoriesWithLogo />
-            {/* Logo categories */}
+            {loading && <Loading />}
+            {error && <ErrorMessage>{error}</ErrorMessage>}
           </div>
           <div className='text-2xl text-center text-red-800 pt-4'>
             {products?.length === 0 ? (

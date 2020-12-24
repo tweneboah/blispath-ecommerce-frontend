@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
+import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../redux/actions/userAction';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import FormContainer from '../components/FormContainer';
+import ErrorMessage from '../components/ErrorMessage';
+import Loading from '../components/Loading';
+
+// Form schema
+const formSchema = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().required().min(5),
+});
 
 const LoginScreen = ({ location, history }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const userLogin = useSelector(state => state.userLogin);
   const { loading, error, userInfo } = userLogin;
   console.log(userLogin);
   const redirect = location.search ? location.search.split('=')[1] : '/';
-
-  const submitHandler = e => {
-    e.preventDefault();
-    dispatch(loginAction(email, password));
-  };
 
   useEffect(() => {
     if (userInfo) {
@@ -36,14 +35,17 @@ const LoginScreen = ({ location, history }) => {
         }}
         onSubmit={values =>
           dispatch(loginAction(values.email, values.password))
-        }>
+        }
+        validationSchema={formSchema}>
         {props => {
           return (
-            <div className='min-h-1/2 bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
+            <div className='min-h-1/2 bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
               <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-                <h2 className='mt-6 text-center text-xl font-extrabold text-gray-900'>
+                <h2 className='mt-6 text-center text-xl font-extrabold text-gray-100'>
                   Lgin to your account
                 </h2>
+                {loading && <Loading />}
+                {error && <ErrorMessage>{error}</ErrorMessage>}
                 <svg
                   className='mx-auto h-12 w-auto text-blue-500'
                   xmlns='http://www.w3.org/2000/svg'
@@ -60,7 +62,7 @@ const LoginScreen = ({ location, history }) => {
               </div>
 
               <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-                <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
+                <div className='bg-gray-100 py-8 px-4 shadow sm:rounded-lg sm:px-10'>
                   <form className='space-y-6' onSubmit={props.handleSubmit}>
                     <div>
                       <label
@@ -72,13 +74,14 @@ const LoginScreen = ({ location, history }) => {
                         <input
                           value={props.values.email}
                           onChange={props.handleChange('email')}
-                          id='email'
-                          name='email'
+                          onBlur={props.handleBlur('email')}
                           type='email'
                           autocomplete='email'
-                          required
                           className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                         />
+                        <div className='text-red-500'>
+                          {props.touched.email && props.errors.email}
+                        </div>
                       </div>
                     </div>
 
@@ -92,12 +95,14 @@ const LoginScreen = ({ location, history }) => {
                         <input
                           value={props.values.password}
                           onChange={props.handleChange('password')}
-                          id='password'
-                          name='password'
+                          onBlur={props.handleBlur('password')}
                           type='password'
                           autocomplete='current-password'
                           className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                         />
+                        <div className='text-red-500'>
+                          {props.touched.password && props.errors.password}
+                        </div>
                       </div>
                     </div>
 
@@ -125,7 +130,7 @@ const LoginScreen = ({ location, history }) => {
                     <div>
                       <button
                         type='submit'
-                        className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                        className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-yellow-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                         Login
                       </button>
                     </div>

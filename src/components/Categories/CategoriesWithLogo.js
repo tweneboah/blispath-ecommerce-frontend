@@ -22,19 +22,19 @@ const CategoriesWithLogo = () => {
   }, []);
 
   return (
-    <div class='mt-12 flex justify-around flex-wrap bg-gray-100 border-1 rounded-full border-gray-300'>
+    <div class='flex flex-wrap justify-center mt-4 md:flex '>
       <ReactTooltip />
       <div
         data-type='info'
         data-tip='All Products'
         onClick={() => dispatch(fetchAllProductsAction(''))}>
-        <VscListOrdered class=' text-gray-400 text-6xl cursor-pointer ' />
+        <VscListOrdered class=' text-gray-400  text-4xl mr-3 cursor-pointer  ' />
       </div>
       <div
         data-type='warning'
         data-tip='Fashion'
         onClick={() => dispatch(filterByCategoryAction('Fashion'))}>
-        <GiClothes class=' text-gray-400 text-7xl border cursor-pointer rounded-full p-1' />
+        <GiClothes class=' text-gray-400  border cursor-pointer text-4xl mr-3' />
       </div>
       <div
         data-type='error'
@@ -42,39 +42,39 @@ const CategoriesWithLogo = () => {
         onClick={() =>
           dispatch(filterByCategoryAction('Laptops and Accessories'))
         }>
-        <GiLaptop class=' text-gray-400 text-6xl pt-2  cursor-pointer ' />
+        <GiLaptop class=' text-gray-400  cursor-pointer  text-4xl mr-3' />
       </div>
       <div
         data-type='dark'
         data-tip='Phone Accessories'
         onClick={() => dispatch(filterByCategoryAction('Phone Accessories'))}>
-        <ImMobile class=' text-gray-400 text-7xl border  cursor-pointer p-2' />
+        <ImMobile class=' text-gray-400 text-4xl mr-3  cursor-pointer' />
       </div>
 
       <div
         data-type='info'
         data-tip='Gents'
         onClick={() => dispatch(filterByCategoryAction('Gents'))}>
-        <GiMonclerJacket class=' text-gray-400 text-7xl  cursor-pointer rounded-full p-3' />
+        <GiMonclerJacket class=' text-gray-400 text-4xl mr-3  cursor-pointer ' />
       </div>
       <div
         data-type='warning'
         data-tip='Home Appliances'
         onClick={() => dispatch(filterByCategoryAction('Home Appliances'))}>
-        <BsSpeaker class=' text-gray-400 text-7xl   p-3 cursor-pointer' />
+        <BsSpeaker class=' text-gray-400 text-4xl mr-3 cursor-pointer' />
       </div>
 
       <div
         data-type='error'
         data-tip='Hot Deals'
         onClick={() => dispatch(filterByCategoryAction('Hot Deals'))}>
-        <BiRun class=' text-gray-400 text-7xl cursor-pointer  p-3' />
+        <BiRun class=' text-gray-400 text-4xl mr-3 cursor-pointer  ' />
       </div>
       <div
         data-type='success'
         data-tip='Auto Parts'
         onClick={() => dispatch(filterByCategoryAction('Auto Parts'))}>
-        <AiFillCar class=' text-gray-400 text-7xl cursor-pointer p-3' />
+        <AiFillCar class=' text-gray-400 text-4xl mr-3 cursor-pointer ' />
       </div>
     </div>
   );

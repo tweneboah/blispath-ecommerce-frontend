@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import HomeScreen from './screens/HomeScreen';
@@ -34,8 +35,6 @@ import HotDealsCategories from './components/Categories/HotDealsCategories';
 import AutoPartsCategories from './components/Categories/AutoPartsCategories';
 import LaptopsAndAccessoriesCategories from './components/Categories/LaptopsAndAccessoriesCategories';
 import PhonesAndAccessoriesCategories from './components/Categories/PhoneAccessoriesCategories';
-
-import Chart from './components/Admin/Chart';
 
 const App = () => {
   return (
@@ -88,7 +87,7 @@ const App = () => {
           <Route exact path='/placeorder' component={PlaceOrderScreen} />
           <Route exact path='/payment' component={PaymentScreen} />
           <Route exact path='/shipping' component={ShippingScreen} />
-          <Route exact path='/paystack/profile' component={ProfileScreen} />
+          <Route exact path='/profile' component={ProfileScreen} />
           <Route exact path='/register' component={RegisterScreen} />
           <Route exact path='/pay' component={MakePayment} />
           {/* Admin Routes */}
