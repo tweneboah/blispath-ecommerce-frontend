@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
-import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import HomeScreen from './screens/HomeScreen';
@@ -16,7 +14,7 @@ import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UsersListScreen';
 import AdminCreateProducts from './screens/AdminScreens/AdminCreateProducts';
 import AdminFetchProducts from './screens/AdminScreens/AdminFetchProducts';
-import Switch from 'react-bootstrap/esm/Switch';
+import { Switch } from 'react-router-dom';
 import MakePayment from './components/MakePayment';
 import AdminAllOrdersScreen from './screens/AdminScreens/AdminAllOrdersScreen';
 import AdminUpdateOrderToDeliverScreen from './screens/AdminScreens/AdminUpdateOrderToDeliverScreen';
@@ -26,7 +24,6 @@ import AdminDasboard from './screens/AdminScreens/AdminDasboard';
 import EditProfileScreen from './screens/EditProfileScreen';
 import Contact from './components/Contact';
 import About from './components/About';
-import FileUpload from './components/FileUpload';
 import Team from './components/Team';
 import FashionCategories from './components/Categories/FashionCategories';
 import GentsCategories from './components/Categories/GentsCategories';
@@ -37,6 +34,8 @@ import HotDealsCategories from './components/Categories/HotDealsCategories';
 import AutoPartsCategories from './components/Categories/AutoPartsCategories';
 import LaptopsAndAccessoriesCategories from './components/Categories/LaptopsAndAccessoriesCategories';
 import PhonesAndAccessoriesCategories from './components/Categories/PhoneAccessoriesCategories';
+
+import Chart from './components/Admin/Chart';
 
 const App = () => {
   return (

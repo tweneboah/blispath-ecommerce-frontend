@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutAction } from '../redux/actions/userAction';
 import { Link } from 'react-router-dom';
 import { SiShopware } from 'react-icons/si';
 import { GiClothes } from 'react-icons/gi';
-import { VscListOrdered } from 'react-icons/vsc';
 // Icons
+import { BiRun } from 'react-icons/bi';
 import { GiLaptop } from 'react-icons/gi';
 import { ImMobile } from 'react-icons/im';
 import { GiMonclerJacket } from 'react-icons/gi';
 import { BsSpeaker } from 'react-icons/bs';
-import { BiPhoneCall, BiRun } from 'react-icons/bi';
 import { AiFillCar } from 'react-icons/ai';
 
 const Header = () => {
