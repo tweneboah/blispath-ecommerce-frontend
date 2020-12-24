@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { makePaymentAction } from '../redux/actions/paymentActions';
 import pay from '../images/secure.png';
 import { Link } from 'react-router-dom';
+
+import baseURL from '../utils/baseURL';
 const MakePayment = ({ location, history, match }) => {
   const { orderId, totalAmount, userEmail } = location.state;
 
@@ -13,7 +15,7 @@ const MakePayment = ({ location, history, match }) => {
     email: userEmail,
     amount: Math.ceil(totalAmount) * 100, //Convert the amount to a whole number
     fullName: 'Emmanuel Tweneboah',
-    callback_url: 'http://localhost:3000/profile',
+    callback_url: `${baseURL}/profile`,
     metadata: { custom_fields: orderId },
   };
 
