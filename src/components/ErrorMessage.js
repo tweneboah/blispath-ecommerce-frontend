@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ErroMessage = ({ children }) => {
+const ErrorMessage = ({ children }) => {
   return (
     <div className='bg-red-900 text-white p-2 text-center rounded-full shadow-lg text-lg'>
       {children}
@@ -8,4 +8,4 @@ const ErroMessage = ({ children }) => {
   );
 };
 
-export default ErroMessage;
+export default ErrorMessage;

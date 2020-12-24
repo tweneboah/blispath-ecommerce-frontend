@@ -180,7 +180,7 @@ const Header = () => {
                               onClick={() =>
                                 setOpenProductMenu(!openProductMenu)
                               }
-                              to='/d'
+                              to='/gents'
                               class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
                               <div>
                                 <GiMonclerJacket class=' text-gray-400 text-3xl  cursor-pointer ' />
@@ -201,7 +201,7 @@ const Header = () => {
                               onClick={() =>
                                 setOpenProductMenu(!openProductMenu)
                               }
-                              to='/d'
+                              to='/auto-parts'
                               class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
                               {/* <!-- Heroicon name: chart-bar --> */}
                               <div>
@@ -223,7 +223,7 @@ const Header = () => {
                               onClick={() =>
                                 setOpenProductMenu(!openProductMenu)
                               }
-                              to='/d'
+                              to='/hot-deals'
                               class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
                               {/* <!-- Heroicon name: chart-bar --> */}
                               <div>
@@ -245,7 +245,7 @@ const Header = () => {
                               onClick={() =>
                                 setOpenProductMenu(!openProductMenu)
                               }
-                              to='/d'
+                              to='/phones-accessories'
                               class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
                               <div>
                                 <ImMobile class=' text-gray-400 text-3xl  cursor-pointer ' />
@@ -266,7 +266,7 @@ const Header = () => {
                               onClick={() =>
                                 setOpenProductMenu(!openProductMenu)
                               }
-                              to='/d'
+                              to='/laptops-accessories'
                               class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
                               <div>
                                 <GiLaptop class=' text-gray-400 text-3xl  cursor-pointer ' />
@@ -287,7 +287,7 @@ const Header = () => {
                               onClick={() =>
                                 setOpenProductMenu(!openProductMenu)
                               }
-                              to='/d'
+                              to='/home-appliances'
                               class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
                               <div>
                                 <BsSpeaker class=' text-gray-400 text-3xl  cursor-pointer ' />

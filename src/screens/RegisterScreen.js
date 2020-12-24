@@ -6,7 +6,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 
 import { registerAction } from '../redux/actions/userAction';
-import ErroMessage from '../components/ErroMessage';
+import ErrorMessage from '../components/ErrorMessage';
 
 const RegisterScreen = ({ location, history }) => {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const RegisterScreen = ({ location, history }) => {
             <div className='min-h-1/2 bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
               <div className='sm:mx-auto sm:w-full sm:max-w-md'>
                 {loading && <Loader />}
-                {error && <ErroMessage>{error}</ErroMessage>}
+                {error && <ErrorMessage>{error}</ErrorMessage>}
                 <h2 className='mt-6 text-center text-xl font-extrabold text-gray-900'>
                   Create new Account
                 </h2>

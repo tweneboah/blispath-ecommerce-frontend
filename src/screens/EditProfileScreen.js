@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import Loader from '../components/Loader';
 
 import { updateUserProfileAction } from '../redux/actions/userAction';
-import ErroMessage from '../components/ErroMessage';
 import SuccessMessage from '../components/SuccessMessage';
+import ErrorMessage from '../components/ErrorMessage';
 
 const EditProfileScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ const EditProfileScreen = ({ history, match }) => {
             <div className='min-h-1/2 bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
               <div className='sm:mx-auto sm:w-full sm:max-w-md'>
                 {loading && <Loader />}
-                {error && <ErroMessage>{error}</ErroMessage>}
+                {error && <ErrorMessage>{error}</ErrorMessage>}
 
                 <h2 className='mt-6 text-center text-xl font-extrabold text-gray-900'>
                   {userInfo && (

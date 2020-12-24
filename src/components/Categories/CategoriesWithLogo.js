@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { GiClothes } from 'react-icons/gi';
 import { VscListOrdered } from 'react-icons/vsc';
-
 import { GiLaptop } from 'react-icons/gi';
 import { ImMobile } from 'react-icons/im';
 import { GiMonclerJacket } from 'react-icons/gi';

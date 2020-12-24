@@ -32,6 +32,11 @@ import FashionCategories from './components/Categories/FashionCategories';
 import GentsCategories from './components/Categories/GentsCategories';
 import PasswordResetUpdate from './screens/PasswordReset/PasswordResetUpdate';
 import PasswordResetSendToken from './screens/PasswordReset/PasswordResetSendToken';
+import HomeAppliancesCategories from './components/Categories/HomeAppliancesCategories';
+import HotDealsCategories from './components/Categories/HotDealsCategories';
+import AutoPartsCategories from './components/Categories/AutoPartsCategories';
+import LaptopsAndAccessoriesCategories from './components/Categories/LaptopsAndAccessoriesCategories';
+import PhonesAndAccessoriesCategories from './components/Categories/PhoneAccessoriesCategories';
 
 const App = () => {
   return (
@@ -40,8 +45,27 @@ const App = () => {
         <Header />
         <Switch>
           <Route exact path='/' component={HomeScreen} />
+          {/* Categories */}
           <Route exact path='/fashions' component={FashionCategories} />
           <Route exact path='/gents' component={GentsCategories} />
+          <Route
+            exact
+            path='/home-appliances'
+            component={HomeAppliancesCategories}
+          />
+          <Route exact path='/auto-parts' component={AutoPartsCategories} />
+          <Route exact path='/hot-deals' component={HotDealsCategories} />
+          <Route
+            exact
+            path='/laptops-accessories'
+            component={LaptopsAndAccessoriesCategories}
+          />
+          <Route
+            exact
+            path='/phones-accessories'
+            component={PhonesAndAccessoriesCategories}
+          />
+          <Route exact path='/hot-deals' component={HotDealsCategories} />
           <Route exact path='/team' component={Team} />
           <Route
             exact

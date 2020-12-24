@@ -7,7 +7,7 @@ import { fetchAllProductsAction } from '../../redux/actions/productActions';
 import Ratings from '../Ratings';
 import ErrorMessage from '../ErrorMessage';
 
-const HotDealsCategories = () => {
+const AutoPartsCategories = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAllProductsAction(''));
@@ -17,8 +17,8 @@ const HotDealsCategories = () => {
 
   const { loading, products, error } = productList;
 
-  const hotDeals =
-    products && products.filter(product => product.category === 'Hot Deals');
+  const autoParts =
+    products && products.filter(product => product.category === 'Auto Parts');
 
   console.log(productList);
   return (
@@ -27,10 +27,10 @@ const HotDealsCategories = () => {
         <div class='relative max-w-7xl mx-auto'>
           <div class='text-center'>
             <h2 class='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
-              Hot Deals products - ({hotDeals?.length})
+              Auto Parts products - ({autoParts?.length})
             </h2>
             <p class='mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4'>
-              Out latest hot deals collection
+              Out latest auto parts collection
             </p>
             {/* Search input */}
             <div className='text-center flex justify-center'>
@@ -50,7 +50,7 @@ const HotDealsCategories = () => {
             </div>
           </div>
           <div className='text-2xl text-center text-red-800 pt-4'>
-            {hotDeals?.length === 0 ? (
+            {autoParts?.length === 0 ? (
               <a className='text-blue-800' href='mailto:e.tweneboah1@gmail.com'>
                 No product. contact the store owner to make pre order
               </a>
@@ -61,7 +61,7 @@ const HotDealsCategories = () => {
           <div class='mt-12   grid gap-3 lg:grid-cols-4 lg:max-w-none md:grid-cols-3 sm:grid-cols-2'>
             {/* Card 1 */}
 
-            {hotDeals?.map(product => {
+            {autoParts?.map(product => {
               const dateNow = new Date();
               const productLasteDateCreated = new Date(product.isProductNew);
               return (
@@ -138,4 +138,4 @@ const HotDealsCategories = () => {
   );
 };
 
-export default HotDealsCategories;
+export default AutoPartsCategories;
