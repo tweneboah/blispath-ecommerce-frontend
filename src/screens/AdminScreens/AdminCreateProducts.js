@@ -4,20 +4,23 @@ import { Formik } from 'formik';
 import Dropzone from 'react-dropzone';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProductAction } from '../../redux/actions/productActions';
-import { productFileImageUploadAction } from '../../redux/actions/productFileImageUploadAction';
-import Axios from 'axios';
 
 const AdminCreateProducts = ({ history }) => {
   const dispatch = useDispatch();
-  //==============GET THE FILE UPLOADED AFTER ACTION
-  const productImageUploaded = useSelector(state => state.productImageUploaded);
-  const { loading, file, error } = productImageUploaded;
-  //File upload
 
+  const productCreate = useSelector(state => state.productCreate);
+
+  const { loading, success, product, error } = productCreate;
+
+  //Rediredirec when product is created
+
+  useEffect(() => {
+    if (success) {
+      history.push('/');
+    }
+  }, [dispatch, success]);
   return (
     <>
-      {loading && <h1>File uploading please wait .....</h1>}
-      {error && <h1>{error}</h1>}
       <Formik
         initialValues={{
           name: '',
@@ -47,6 +50,16 @@ const AdminCreateProducts = ({ history }) => {
                   <h2 class='mt-6 text-center text-3xl font-extrabold text-gray-900'>
                     Add New Product
                   </h2>
+                  <div>
+                    {loading && (
+                      <p class='text-lg text-pink-500'>
+                        Product is creating please wait....
+                      </p>
+                    )}
+                    {error && (
+                      <p class='text-lg bg-gray-200 text-red-600'>{error}</p>
+                    )}
+                  </div>
                 </div>
                 <div></div>
                 <div class='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>

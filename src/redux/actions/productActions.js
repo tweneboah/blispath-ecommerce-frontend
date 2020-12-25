@@ -124,7 +124,6 @@ const createProductAction = productData => async (dispatch, getState) => {
       formProductData.append('image', productData.image[i]);
     }
 
-    console.log(formProductData.getAll('image'));
     const { data } = await axios.post(
       `${baseURL}/api/products`,
       formProductData,

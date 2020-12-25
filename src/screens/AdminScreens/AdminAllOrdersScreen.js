@@ -44,12 +44,12 @@ const AdminAllOrdersScreen = ({ history }) => {
   }, 0);
 
   return (
-    <div className='h-screen bg-gray-600 text-gray-100'>
+    <div className='min-h-screen bg-gray-600 text-gray-100'>
       {loading ? (
         <h1 className='text-center pt-44 text-gray-200'>loading.....</h1>
       ) : (
-        <section class='py-8 px-4 '>
-          <h2 class='text-3xl mb-20 mt-20 text-center font-heading font-semibold text-gray-100'>
+        <section class=' px-4 min-h-screen'>
+          <h2 class='text-3xl mb-20 pt-5 text-center font-heading font-semibold text-gray-100'>
             All Orders history
           </h2>
 
@@ -65,18 +65,18 @@ const AdminAllOrdersScreen = ({ history }) => {
                       prefix={'GHS'}
                     />
                   </h3>
-                  <span class='leading-none'>Amount Spent</span>
+                  <span class='leading-none text-lg'>Total Orders Amount</span>
                 </div>
               </div>
             </div>
 
             <div class='w-full lg:w-1/4 px-4 mb-6 lg:mb-0'>
               <div class='h-full'>
-                <div class='text-center p-4 mb-2 bg-green-500 text-white rounded'>
-                  <h3 class='text-3xl leading-tight  font-heading font-semibold'>
+                <div class='text-center p-4 mb-2 bg-yellow-500 text-white rounded'>
+                  <h3 class='text-3xl leading-tight   font-semibold'>
                     {orders?.length}
                   </h3>
-                  <span class='leading-none'>Total Purchased</span>
+                  <span class='leading-none text-lg'>Total Purchased</span>
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@ const AdminAllOrdersScreen = ({ history }) => {
                   Amount
                 </th>
                 <th class='text-center border-t px-2 py-2' scope='col'>
-                  Paid
+                  Paid At
                 </th>
                 <th class='text-center border-t px-2 py-2' scope='col'>
                   Paid
