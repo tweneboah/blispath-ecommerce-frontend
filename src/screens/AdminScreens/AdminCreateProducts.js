@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { useDropzone } from 'react-dropzone';
 import { Formik } from 'formik';
 import Dropzone from 'react-dropzone';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProductAction } from '../../redux/actions/productActions';
 
-const AdminCreateProducts = ({ history }) => {
+const AdminCreateProducts = ({ history, match }) => {
   const dispatch = useDispatch();
 
   const productCreate = useSelector(state => state.productCreate);
@@ -244,13 +243,14 @@ const AdminCreateProducts = ({ history }) => {
                       </div>
                     </div>
 
-                    <div className='mt-4'>
-                      <button
-                        type='submit'
-                        class='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
-                        Create Product
-                      </button>
-                    </div>
+                    <button
+                      class='bg-red-700 block w-full py-2 rounded-full mt-3 text-white'
+                      type='submit'>
+                      {/* {props.values.image.length <= 0
+                        ? 'Upload image first'
+                        : 'Create productff'} */}
+                      create Product
+                    </button>
                   </div>
                 </div>
               </div>
