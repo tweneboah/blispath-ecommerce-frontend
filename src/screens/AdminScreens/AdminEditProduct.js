@@ -352,8 +352,17 @@ const AdminEditProduct = ({ history, match }) => {
                     <div className='mt-4'>
                       <button
                         type='submit'
-                        class='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                        class='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                         Create Product
+                      </button>
+                    </div>
+
+                    <div className='mt-4'>
+                      <button
+                        onClick={dispatch(deleteProductAction(match.params.id))}
+                        type='submit'
+                        class='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                        Delete product
                       </button>
                     </div>
                   </div>

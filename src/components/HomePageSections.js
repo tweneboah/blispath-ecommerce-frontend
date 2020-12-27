@@ -1,11 +1,15 @@
 import React from 'react';
-
+import shipping from '../images/shipping.jpg';
+import { FaShippingFast } from 'react-icons/fa';
+import { GiMoneyStack } from 'react-icons/gi';
+import { FcCustomerSupport } from 'react-icons/fc';
+// import { FaShippingFast } from 'react-icons/fa';
 const HomePageSections = () => {
   return (
-    <div class='bg-gray-900 -ml-9  overflow-hidden'>
-      <div class='relative max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8'>
+    <div className='bg-gray-900 -ml-9  overflow-hidden'>
+      <div className='relative max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8'>
         <svg
-          class='absolute top-0 left-full transform -translate-x-1/2 -translate-y-3/4 lg:left-auto lg:right-full lg:translate-x-2/3 lg:translate-y-1/4'
+          className='absolute top-0 left-full transform -translate-x-1/2 -translate-y-3/4 lg:left-auto lg:right-full lg:translate-x-2/3 lg:translate-y-1/4'
           width='404'
           height='784'
           fill='none'
@@ -24,7 +28,7 @@ const HomePageSections = () => {
                 y='0'
                 width='4'
                 height='4'
-                class='text-gray-200'
+                className='text-gray-200'
                 fill='currentColor'
               />
             </pattern>
@@ -36,40 +40,24 @@ const HomePageSections = () => {
           />
         </svg>
 
-        <div class='relative lg:grid lg:grid-cols-3 lg:gap-x-8'>
-          <div class='lg:col-span-1'>
-            <h2 class='text-2xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
+        <div className='relative lg:grid lg:grid-cols-3 lg:gap-x-8'>
+          <div className='lg:col-span-1'>
+            <h2 className='text-2xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
               A better way to Shop.
             </h2>
-            <img
-              class='h-3/4 w-full'
-              src='https://cdn.pixabay.com/photo/2017/07/08/09/45/joy-2483926_1280.jpg'
-              alt=''
-            />
+            <img className='h-3/4 w-full' src={shipping} alt='shipping' />
           </div>
-          <dl class='mt-10 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:mt-0 lg:col-span-2'>
+          <dl className='mt-10 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:mt-0 lg:col-span-2'>
             <div>
-              <div class='flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
-                <svg
-                  class='h-6 w-6'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                  aria-hidden='true'>
-                  <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9'
-                  />
-                </svg>
+              <div className='flex items-center justify-center h-16 w-16 rounded-md bg-yellow-500 text-white'>
+                {/* Logo */}
+                <FaShippingFast className='text-5xl' />
               </div>
-              <div class='mt-5'>
-                <dt class='text-lg leading-6 font-medium text-gray-900'>
+              <div className='mt-5'>
+                <dt className='text-lg leading-6 font-medium text-gray-900'>
                   Competitive rates
                 </dt>
-                <dd class='mt-2 text-base text-gray-500'>
+                <dd className='mt-2 text-base text-gray-500'>
                   Consequuntur omnis dicta cumque, inventore atque ab dolores
                   aspernatur tempora ab doloremque.
                 </dd>
@@ -77,27 +65,15 @@ const HomePageSections = () => {
             </div>
 
             <div>
-              <div class='flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
-                <svg
-                  class='h-6 w-6'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                  aria-hidden='true'>
-                  <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3'
-                  />
-                </svg>
+              <div className='flex items-center justify-center h-16 w-16 rounded-md bg-yellow-500 text-white'>
+                {/* Logo */}
+                <GiMoneyStack className='text-5xl' />
               </div>
-              <div class='mt-5'>
-                <dt class='text-lg leading-6 font-medium text-gray-900'>
+              <div className='mt-5'>
+                <dt className='text-lg leading-6 font-medium text-gray-900'>
                   No hidden fees
                 </dt>
-                <dd class='mt-2 text-base text-gray-500'>
+                <dd className='mt-2 text-base text-gray-500'>
                   Corporis quisquam nostrum nulla veniam recusandae temporibus
                   aperiam officia incidunt at distinctio ratione.
                 </dd>
@@ -105,27 +81,15 @@ const HomePageSections = () => {
             </div>
 
             <div>
-              <div class='flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
-                <svg
-                  class='h-6 w-6'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                  aria-hidden='true'>
-                  <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M13 10V3L4 14h7v7l9-11h-7z'
-                  />
-                </svg>
+              <div className='flex items-center justify-center h-16 w-16 rounded-md bg-gray-400 text-white'>
+                {/* Logo */}
+                <FcCustomerSupport className='text-5xl' />
               </div>
-              <div class='mt-5'>
-                <dt class='text-lg leading-6 font-medium text-gray-900'>
+              <div className='mt-5'>
+                <dt className='text-lg leading-6 font-medium text-gray-900'>
                   Instant transfers
                 </dt>
-                <dd class='mt-2 text-base text-gray-500'>
+                <dd className='mt-2 text-base text-gray-500'>
                   Omnis, illo delectus? Libero, possimus nulla nemo tenetur
                   adipisci repellat dolore eligendi velit doloribus mollitia.
                 </dd>
@@ -133,9 +97,9 @@ const HomePageSections = () => {
             </div>
 
             <div>
-              <div class='flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
+              <div className='flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
                 <svg
-                  class='h-6 w-6'
+                  className='h-6 w-6'
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
                   viewBox='0 0 24 24'
@@ -149,11 +113,11 @@ const HomePageSections = () => {
                   />
                 </svg>
               </div>
-              <div class='mt-5'>
-                <dt class='text-lg leading-6 font-medium text-gray-900'>
+              <div className='mt-5'>
+                <dt className='text-lg leading-6 font-medium text-gray-900'>
                   Reminder emails
                 </dt>
-                <dd class='mt-2 text-base text-gray-500'>
+                <dd className='mt-2 text-base text-gray-500'>
                   Veniam necessitatibus reiciendis fugit explicabo dolorem nihil
                   et omnis assumenda odit? Quisquam unde accusantium.
                 </dd>

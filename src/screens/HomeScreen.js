@@ -3,18 +3,16 @@ import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CategoriesWithLogo from '../components/Categories/CategoriesWithLogo';
+import Customers from '../components/Customers';
 import ErrorMessage from '../components/ErrorMessage';
+import FAQ from '../components/FAQ';
 import HomeBanner from '../components/HomeBanner';
 import HomePageSections from '../components/HomePageSections';
-import Loader from '../components/Loader';
+
 import Loading from '../components/Loading';
-import Message from '../components/Message';
-import Product from '../components/Product';
+
 import Ratings from '../components/Ratings';
-import {
-  fetchAllProductsAction,
-  filterByCategoryAction,
-} from '../redux/actions/productActions';
+import { fetchAllProductsAction } from '../redux/actions/productActions';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -32,10 +30,10 @@ const HomeScreen = () => {
     <>
       <HomeBanner />
 
-      <div class='relative bg-gray-200 pt-16  pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8'>
+      <div class='relative bg-gradient-to-r from-gray-200 to-gray-100 pt-16  pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8'>
         <div class='relative max-w-7xl mx-auto'>
           <div class='text-center'>
-            <h2 class='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
+            <h2 class='text-3xl animate-bounce tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
               Latest Products
             </h2>
             <p class='mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4'>
@@ -74,7 +72,7 @@ const HomeScreen = () => {
               const productLasteDateCreated = new Date(product.isProductNew);
               return (
                 <>
-                  <div class='flex flex-col rounded-lg shadow-lg overflow-hidden'>
+                  <div class='flex flex-col hover:scale-50 rounded-lg shadow-lg overflow-hidden'>
                     <div class='flex-shrink-0'>
                       <Link to={`/product/${product._id}`}>
                         <img
@@ -142,7 +140,9 @@ const HomeScreen = () => {
           </div>
         </div>
       </div>
+      <Customers />
       <HomePageSections />
+      <FAQ />
     </>
   );
 };

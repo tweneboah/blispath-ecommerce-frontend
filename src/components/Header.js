@@ -95,7 +95,11 @@ const Header = () => {
                     className=' text-white px-3 py-2 rounded-md text-sm font-medium'>
                     About
                   </Link>
-
+                  <Link
+                    to='/team'
+                    className=' text-white px-3 py-2 rounded-md text-sm font-medium'>
+                    Team
+                  </Link>
                   <Link
                     to='/contact'
                     className=' text-white px-3 py-2 rounded-md text-sm font-medium'>
