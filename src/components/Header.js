@@ -12,6 +12,7 @@ import { GiMonclerJacket } from 'react-icons/gi';
 import { BsSpeaker } from 'react-icons/bs';
 import { AiFillCar } from 'react-icons/ai';
 import { AiOutlineLogout } from 'react-icons/ai';
+import '../styles/navLinks.css';
 
 const Header = () => {
   const userLogin = useSelector(state => state.userLogin);
@@ -92,23 +93,23 @@ const Header = () => {
                 <div className='flex space-x-4'>
                   <Link
                     to='/about'
-                    className=' text-white px-3 py-2 rounded-md text-sm font-medium'>
+                    className=' custom_menu text-white px-3 py-2 rounded-md text-sm font-medium'>
                     About
                   </Link>
                   <Link
                     to='/team'
-                    className=' text-white px-3 py-2 rounded-md text-sm font-medium'>
+                    className=' custom_menu text-white px-3 py-2 rounded-md text-sm font-medium'>
                     Team
                   </Link>
                   <Link
                     to='/contact'
-                    className=' text-white px-3 py-2 rounded-md text-sm font-medium'>
+                    className='  custom_menu text-white px-3 py-2 rounded-md text-sm font-medium'>
                     Contact
                   </Link>
 
                   <Link
                     to='/'
-                    className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
+                    className=' custom_menu text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
                     Products
                   </Link>
                   <div class='relative'>
@@ -118,7 +119,7 @@ const Header = () => {
                         to='/products'
                         onClick={openProductMenuHandler}
                         type='button'
-                        class='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
+                        class='custom_menu text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'>
                         <span>Category</span>
                         {/* <!--
                   Heroicon name: chevron-down
@@ -168,7 +169,7 @@ const Header = () => {
                               to='/fashions'
                               class='-m-3 rounded-lg p-3 flex items-start hover:bg-gray-50'>
                               <GiClothes class=' text-gray-400 text-3xl border cursor-pointer rounded-full p-1' />
-                              <div class='ml-4'>
+                              <div class='custom_menu ml-4'>
                                 <p class='text-base font-medium text-gray-900'>
                                   Fashion
                                 </p>
@@ -190,7 +191,7 @@ const Header = () => {
                               </div>
 
                               <div class='ml-4 text-center'>
-                                <p class='text-base text-center font-medium text-gray-900'>
+                                <p class='custom_menu text-base text-center font-medium text-gray-900'>
                                   Gents
                                 </p>
                               </div>
@@ -406,6 +407,27 @@ const Header = () => {
                           />
                         </svg>
                         <span className='truncate'> Settings</span>
+                      </Link>
+
+                      <Link
+                        onClick={() => settogle(!togle)}
+                        to={`/dashboard`}
+                        className='text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-3 py-2 text-sm font-medium rounded-md'>
+                        <svg
+                          className='text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6'
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          stroke='currentColor'
+                          aria-hidden='true'>
+                          <path
+                            stroke-linecap='round'
+                            stroke-linejoin='round'
+                            stroke-width='2'
+                            d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z'
+                          />
+                        </svg>
+                        <span className='truncate'> Graphs</span>
                       </Link>
                       <Link
                         onClick={() => settogle(!togle)}

@@ -17,6 +17,7 @@ import {
   PRODUCT_DELETE_SUCCESS,
 } from '../actionTypes/productActionTypes';
 import baseURL from '../../utils/baseURL.js';
+
 export const fetchAllProductsAction = SearchTerm => {
   return async dispatch => {
     try {

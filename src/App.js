@@ -36,12 +36,16 @@ import AutoPartsCategories from './components/Categories/AutoPartsCategories';
 import LaptopsAndAccessoriesCategories from './components/Categories/LaptopsAndAccessoriesCategories';
 import PhonesAndAccessoriesCategories from './components/Categories/PhoneAccessoriesCategories';
 
+import HomeSlider from './components/HomeSlider';
+import Dashboard from './components/Admins/Dashboard';
+
 const App = () => {
   return (
     <>
       <Router>
         <Header />
         <Switch>
+          <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/' component={HomeScreen} />
           {/* Categories */}
           <Route exact path='/fashions' component={FashionCategories} />

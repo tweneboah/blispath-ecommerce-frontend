@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import Dropzone from 'react-dropzone';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { createProductAction } from '../../redux/actions/productActions';
 
@@ -11,13 +12,19 @@ const AdminCreateProducts = ({ history, match }) => {
 
   const { loading, success, product, error } = productCreate;
 
-  //Rediredirec when product is created
-
+  //Rediredirect when product is created
   useEffect(() => {
     if (success) {
       history.push('/');
     }
   }, [dispatch, success]);
+
+  //Redirect if not admin
+  const userLogin = useSelector(state => state.userLogin);
+  const { userInfo } = userLogin;
+  useEffect(() => {
+    if (userInfo && !userInfo.isAdmin) history.pushState('/profile');
+  });
   return (
     <>
       <Formik

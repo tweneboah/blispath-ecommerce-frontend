@@ -8,11 +8,12 @@ import ErrorMessage from '../components/ErrorMessage';
 import FAQ from '../components/FAQ';
 import HomeBanner from '../components/HomeBanner';
 import HomePageSections from '../components/HomePageSections';
-
+import '../me.css';
 import Loading from '../components/Loading';
 
 import Ratings from '../components/Ratings';
 import { fetchAllProductsAction } from '../redux/actions/productActions';
+import HomeSlider from '../components/HomeSlider';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -28,9 +29,9 @@ const HomeScreen = () => {
 
   return (
     <>
-      <HomeBanner />
+      <HomeSlider />
 
-      <div class='relative bg-gradient-to-r from-gray-200 to-gray-100 pt-16  pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8'>
+      <div class='relative  pt-16  pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8 '>
         <div class='relative max-w-7xl mx-auto'>
           <div class='text-center'>
             <h2 class='text-3xl animate-bounce tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
@@ -50,7 +51,7 @@ const HomeScreen = () => {
               />
             </div>
             {/* Logo categories */}
-            <CategoriesWithLogo />
+            {/* <CategoriesWithLogo /> */}
             {loading && <Loading />}
             {error && <ErrorMessage>{error}</ErrorMessage>}
           </div>
@@ -72,8 +73,8 @@ const HomeScreen = () => {
               const productLasteDateCreated = new Date(product.isProductNew);
               return (
                 <>
-                  <div class='flex flex-col hover:scale-50 rounded-lg shadow-lg overflow-hidden'>
-                    <div class='flex-shrink-0'>
+                  <div class=' element group border-indigo-500 hover:bg-white hover:shadow-lg hover:transform scale-150 flex flex-col rounded-lg  overflow-hidden '>
+                    <div class=' flex-shrink-0'>
                       <Link to={`/product/${product._id}`}>
                         <img
                           class='h-48 w-full object-cover'
@@ -113,12 +114,12 @@ const HomeScreen = () => {
                           />
                         </a>
                       </div>
-                      <div class='mt-6 flex items-center'>
+                      <div class='mt-6 flex items-center '>
                         <div class='flex-shrink-0'>
                           <a href='#'>
                             <span class='sr-only'>{product?.category}</span>
                             <img
-                              class='h-10 w-10 rounded-full'
+                              class='h-10 w-10 rounded-full '
                               src={product.image[0]?.url}
                               alt=''
                             />

@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-
 import Loader from '../components/Loader';
-
 import { updateUserProfileAction } from '../redux/actions/userAction';
 import SuccessMessage from '../components/SuccessMessage';
 import ErrorMessage from '../components/ErrorMessage';
