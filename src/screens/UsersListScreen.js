@@ -23,7 +23,7 @@ const UserListScreen = ({ history }) => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(fetchAllUsersAction());
     } else {
-      history.push('/login');
+      history.push('/profile');
     }
   }, [dispatch, history, userInfo]);
 

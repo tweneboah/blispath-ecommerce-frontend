@@ -1,9 +1,20 @@
 import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import Dropzone from 'react-dropzone';
-
+import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProductAction } from '../../redux/actions/productActions';
+
+// Form schema
+const formSchema = yup.object({
+  name: yup.string().required(),
+  price: yup.string().required(),
+  brand: yup.string().required(),
+  category: yup.string().required(),
+  countInStock: yup.string().required(),
+  numReviews: yup.string().required(),
+  description: yup.string().required(),
+});
 
 const AdminCreateProducts = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -32,103 +43,114 @@ const AdminCreateProducts = ({ history, match }) => {
           name: '',
           price: '',
           brand: '',
-          category: '',
+          category: 'Fashion',
           countInStock: '',
           numReviews: '',
           description: '',
           image: [],
         }}
         onSubmit={values => {
-          console.log(values.image);
-
-          dispatch(createProductAction(values));
-        }}>
+          //dispatch(createProductAction(values));
+          console.log(values);
+        }}
+        validationSchema={formSchema}>
         {props => {
           return (
             <form onSubmit={props.handleSubmit}>
-              <div class='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
-                <div class='sm:mx-auto sm:w-full sm:max-w-md'>
+              <div className='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
+                <div className='sm:mx-auto sm:w-full sm:max-w-md'>
                   <img
-                    class='mx-auto h-12 w-auto'
+                    className='mx-auto h-12 w-auto'
                     src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
                     alt='Workflow'
                   />
-                  <h2 class='mt-6 text-center text-3xl font-extrabold text-gray-900'>
+                  <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
                     Add New Product
                   </h2>
                   <div>
                     {loading && (
-                      <p class='text-lg text-pink-500'>
+                      <p className='text-lg text-pink-500'>
                         Product is creating please wait....
                       </p>
                     )}
                     {error && (
-                      <p class='text-lg bg-gray-200 text-red-600'>{error}</p>
+                      <p className='text-lg bg-gray-200 text-red-600'>
+                        {error}
+                      </p>
                     )}
                   </div>
                 </div>
                 <div></div>
-                <div class='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-                  <div class='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
+                <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
+                  <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
                     <div>
                       <label
                         for='email'
-                        class='block text-sm font-medium text-gray-700'>
+                        className='block text-sm font-medium text-gray-700'>
                         Product name
                       </label>
-                      <div class='mt-1'>
+                      <div className='mt-1'>
                         <input
+                          onBlur={props.handleBlur('name')}
                           value={props.values.name}
                           onChange={props.handleChange('name')}
                           type='text'
                           autocomplete='text'
-                          class='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                          className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                         />
                       </div>
+                      <div className='text-red-500'>
+                        {props.touched.name && props.errors.name}
+                      </div>
                     </div>
-
                     <div>
                       <label
                         for='password'
-                        class='block text-sm font-medium text-gray-700'>
+                        className='block text-sm font-medium text-gray-700'>
                         Product price
                       </label>
-                      <div class='mt-1'>
+                      <div className='mt-1'>
                         <input
+                          onBlur={props.handleBlur('price')}
                           value={props.values.price}
                           onChange={props.handleChange('price')}
                           id='number'
                           name='number'
                           type='number'
                           autocomplete='current-text'
-                          class='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                          className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                         />
                       </div>
+                      <div className='text-red-500'>
+                        {props.touched.price && props.errors.price}
+                      </div>
                     </div>
-
                     <div>
                       <label
                         for='password'
-                        class='block text-sm font-medium text-gray-700'>
+                        className='block text-sm font-medium text-gray-700'>
                         Product brand
                       </label>
-                      <div class='mt-1'>
+                      <div className='mt-1'>
                         <input
+                          onBlur={props.handleBlur('brand')}
                           value={props.values.brand}
                           onChange={props.handleChange('brand')}
                           type='text'
                           autocomplete='text'
-                          class='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                          className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                         />
+                      </div>
+                      <div className='text-red-500'>
+                        {props.touched.brand && props.errors.brand}
                       </div>
                     </div>
                     {/* Upload image */}
-
-                    <div class='mt-2 sm:mt-0 sm:col-span-2'>
-                      <div class='max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md'>
-                        <div class='space-y-1 text-center'>
+                    <div className='mt-2 sm:mt-0 sm:col-span-2'>
+                      <div className='max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md'>
+                        <div className='space-y-1 text-center'>
                           <svg
-                            class='mx-auto h-12 w-12 text-gray-400'
+                            className='mx-auto h-12 w-12 text-gray-400'
                             stroke='currentColor'
                             fill='none'
                             viewBox='0 0 48 48'
@@ -140,7 +162,7 @@ const AdminCreateProducts = ({ history, match }) => {
                               stroke-linejoin='round'
                             />
                           </svg>
-                          <div class='flex text-sm text-gray-600'>
+                          <div className='flex text-sm text-gray-600'>
                             <Dropzone
                               accept='image/jpeg, image/png'
                               maxFiles={4}
@@ -154,7 +176,7 @@ const AdminCreateProducts = ({ history, match }) => {
                                 <div className='container'>
                                   <div
                                     {...getRootProps({
-                                      className: 'dropzone',
+                                      classNameName: 'dropzone',
                                       onDrop: event => event.stopPropagation(),
                                     })}>
                                     <input {...getInputProps()} />
@@ -167,7 +189,7 @@ const AdminCreateProducts = ({ history, match }) => {
                               )}
                             </Dropzone>
                           </div>
-                          <p class='text-sm text-gray-500'>
+                          <p className='text-sm text-gray-500'>
                             PNG, JPG, GIF minimum size 1M
                           </p>
                         </div>
@@ -175,89 +197,116 @@ const AdminCreateProducts = ({ history, match }) => {
                     </div>
                     {/* end of upload image */}
                     <div>
-                      <div class='mt-1'>
+                      <div className='mt-1'>
                         <div>
                           <label
                             for='location'
-                            class='block text-sm font-medium text-gray-700'>
+                            className='block text-sm font-medium text-gray-700'>
                             Category
                           </label>
                           <select
-                            required
+                            onBlur={props.handleBlur('category')}
                             onChange={props.handleChange('category')}
                             name='category'
-                            class='mt-1 block border w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'>
-                            <option>Fashion</option>
-                            <option>Gents</option>
-                            <option>Ladies</option>
-                            <option>Hot Deals</option>
-                            <option>Phone Accessories</option>
-                            <option>Laptops and Accessories</option>
-                            <option>Home Appliances</option>
+                            className='mt-1 block border w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'>
+                            <option value='Fashion'>Fashion</option>
+                            <option value='Gents'>Gents</option>
+                            <option value='Ladies'>Ladies</option>
+                            <option value='Hot Deals'>Hot Deals</option>
+                            <option value='Phone Accessories'>
+                              Phone Accessories
+                            </option>
+                            <option value='Laptops and Accessories'>
+                              Laptops and Accessories
+                            </option>
+                            <option value='Home Appliances'>
+                              Home Appliances
+                            </option>
                           </select>
                         </div>
+                      </div>
+                      <div className='text-red-500'>
+                        {props.touched.category && props.errors.category}
                       </div>
                     </div>
                     <div>
                       <label
                         for='password'
-                        class='block text-sm font-medium text-gray-700'>
+                        className='block text-sm font-medium text-gray-700'>
                         Product in Stock
                       </label>
-                      <div class='mt-1'>
+                      <div className='mt-1'>
                         <input
+                          onBlur={props.handleBlur('countInStock')}
                           value={props.values.countInStock}
                           onChange={props.handleChange('countInStock')}
                           type='text'
                           autocomplete='text'
-                          class='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                          className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                         />
+                      </div>
+                      <div className='text-red-500'>
+                        {props.touched.countInStock &&
+                          props.errors.countInStock}
                       </div>
                     </div>
                     <div>
                       <label
                         for='password'
-                        class='block text-sm font-medium text-gray-700'>
+                        className='block text-sm font-medium text-gray-700'>
                         Product description
                       </label>
-                      <div class='mt-1'>
+                      <div className='mt-1'>
                         <textarea
-                          cols='10'
+                          cols='20'
+                          onBlur={props.handleBlur.description}
                           value={props.values.description}
                           onChange={props.handleChange('description')}
                           id='description'
                           name='description'
                           type='textarea'
                           autocomplete='current-description'
-                          class='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'></textarea>
+                          className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'></textarea>
                       </div>
                     </div>
-
+                    <div className='text-red-500'>
+                      {props.touched.description && props.errors.description}
+                    </div>
                     <div>
                       <label
                         for='password'
-                        class='block text-sm font-medium text-gray-700'>
+                        className='block text-sm font-medium text-gray-700'>
                         Number of Reviews
                       </label>
-                      <div class='mt-1'>
+                      <div className='mt-1'>
                         <input
+                          onBlur={props.handleBlur('numReviews')}
                           value={props.values.numReviews}
                           onChange={props.handleChange('numReviews')}
                           type='text'
                           autocomplete='current-password'
-                          class='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                          className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                         />
                       </div>
+                      <div className='text-red-500'>
+                        {props.touched.numReviews && props.errors.numReviews}
+                      </div>
                     </div>
-
-                    <button
-                      class='bg-red-700 block w-full py-2 rounded-full mt-3 text-white'
-                      type='submit'>
-                      {/* {props.values.image.length <= 0
-                        ? 'Upload image first'
-                        : 'Create productff'} */}
-                      create Product
-                    </button>
+                    {/* Check if a user has uploaded imgage */}
+                    {props.values.image.length === 0 ? (
+                      <button
+                        disabled
+                        className='bg-red-200 block w-full py-3 text-lg cursor-not-allowed rounded-full mt-3 text-white'
+                        type='submit'>
+                        Please upload image to continue
+                      </button>
+                    ) : (
+                      <button
+                        className='bg-yellow-700 block py-3 text-lg w-full   rounded-full mt-3 text-white'
+                        type='submit'>
+                        Create Product
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
