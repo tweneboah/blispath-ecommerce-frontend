@@ -1,0 +1,40 @@
+.slideshowsection {
+  display: block;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.slider {
+  min-height: 80vh;
+}
+
+.slide {
+  background-image: url('../images/contactme.jpg'),
+    url('https://d3e54v103j8qbb.cloudfront.net/img/background-image.svg');
+  background-position: 50% 50%, 0px 0px;
+  background-size: cover, auto;
+}
+
+.slide-2 {
+  background-image: url('../images/contactme.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.slide-3 {
+  background-image: url('../images/contactme.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+@media screen and (max-width: 991px) {
+  .hamburicon {
+    color: #e7dddd;
+  }
+}
