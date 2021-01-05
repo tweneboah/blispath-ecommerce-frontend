@@ -1,18 +1,84 @@
 .navbarcontainer {
-  background-color: #912020;
+  background-color: #a77c00;
 }
 
 .navlinkitem {
-  color: #f5e9e9;
-  font-size: 1em;
+  -webkit-transition: -webkit-transform 200ms ease;
+  transition: -webkit-transform 200ms ease;
+  transition: transform 200ms ease;
+  transition: transform 200ms ease, -webkit-transform 200ms ease;
+  color: #f7e7e7;
 }
 
-@media screen and (max-width: 991px) {
-  .hamburicon {
-    color: #e7dddd;
-  }
+.navlinkitem:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
 
-  .navbar {
-    background-color: #914242;
+.nav-menu {
+  background-color: #a77c00;
+}
+
+.logobranddiv {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: rgba(233, 140, 140, 0);
+}
+
+.dropdownlink {
+  color: #e4d8d8;
+}
+
+.dropdownlinkitem {
+  background-color: #10386b;
+  color: #faf2f2;
+}
+
+.dropdownlinkitem.navlinkitem {
+  background-color: #a77c00;
+}
+
+.dropdownicon {
+  color: #fcfcfc;
+}
+
+.dropdownicon:active {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.logocontain {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 767px) {
+  .nav-menu {
+    background-color: #a77c00;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .hamburgericon {
+    color: #faf7f7;
+    font-size: 20px;
   }
 }

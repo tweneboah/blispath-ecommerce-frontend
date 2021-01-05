@@ -1,10 +1,7 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-//import '../src/styles/normalize.css';
-import './styles/default.css';
-//import './styles/main.css';
 import Footer from './components/Footer';
-import Header from './components/Header';
+import Navbar from './components/Navbar';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
@@ -38,18 +35,16 @@ import HotDealsCategories from './components/Categories/HotDealsCategories';
 import AutoPartsCategories from './components/Categories/AutoPartsCategories';
 import LaptopsAndAccessoriesCategories from './components/Categories/LaptopsAndAccessoriesCategories';
 import PhonesAndAccessoriesCategories from './components/Categories/PhoneAccessoriesCategories';
-
-import HomeSlider from './components/HomeSlider';
 import Dashboard from './components/Admins/Dashboard';
 
 const App = () => {
   return (
     <>
       <Router>
-        <Header />
+        <Navbar />
         <Switch>
-          <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/' component={HomeScreen} />
+          <Route exact path='/dashboard' component={Dashboard} />
           {/* Categories */}
           <Route exact path='/fashions' component={FashionCategories} />
           <Route exact path='/gents' component={GentsCategories} />
