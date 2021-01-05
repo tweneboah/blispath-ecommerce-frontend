@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import HomeScreen from './screens/HomeScreen';
+import HomeScreen from './screens/HomeScreen/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
