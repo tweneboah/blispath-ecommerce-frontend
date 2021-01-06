@@ -1,5 +1,5 @@
 .slideshowsection {
-  height: 70vh;
+  height: 90vh;
   min-height: auto;
   background-color: #c03838;
   background-image: url('https://d3e54v103j8qbb.cloudfront.net/img/background-image.svg');
@@ -19,25 +19,25 @@
       from(rgba(0, 0, 0, 0.12)),
       to(rgba(0, 0, 0, 0.12))
     ),
-    url('../images/p1.jpg');
+    url('../images/slide1.png');
   background-image: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.12),
       rgba(0, 0, 0, 0.12)
     ),
-    url('../images/p1.jpg');
+    url('../images/slide1.png');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
 }
 
 .sliderimg2 {
-  background-image: url('../images/p2.jpg');
+  background-image: url('../images/buy2.png');
   background-position: 50% 50%;
   background-size: cover;
 }
 
 .sliderimg3 {
-  background-image: url('../images/happy.png');
+  background-image: url('../images/shipping.png');
   background-position: 50% 50%;
   background-size: cover;
 }
