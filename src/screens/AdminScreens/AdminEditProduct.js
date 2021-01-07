@@ -29,154 +29,15 @@ const AdminEditProduct = ({ history, match }) => {
   const product =
     products && products.find(product => product._id === match.params.id);
 
+  const confirmDeleteProduct = () => {
+    let isDelete = window.confirm(
+      'Are you sure you want to delete this product ?'
+    );
+
+    if (isDelete) dispatch(deleteProductAction(match.params.id));
+    history.push('/admin/fetchproducts');
+  };
   return (
-    // <>
-    //   {loading && <h1>File uploading please wait .....</h1>}
-    //   {error && <h1>{error}</h1>}
-    //   {!product & !match.params.id ? (
-    //     <h1>product loading</h1>
-    //   ) : (
-    //     <Formik
-    //       initialValues={{
-    //         name: product && product.name,
-    //         price: product && product.price,
-    //         brand: product && product.brand,
-    //         category: product && product.category,
-    //         countInStock: product && product.countInStock,
-    //         numReviews: product && product.numReviews,
-    //         description: product && product.description,
-    //       }}
-    //       onSubmit={values => {
-    //         dispatch(updateProductAction(match.params.id, values));
-    //         //Redirect
-    //         // history.push('/admin/fetchproducts');
-    //       }}>
-    //       {props => {
-    //         return (
-    //           <>
-    //             <form onSubmit={props.handleSubmit}>
-    //               <div className='container'>
-    //                 <div className='row justify-content-center'>
-    //                   <div className='col-md-5 col-lg-4'>
-    //                     <label className='sr-only' htmlFor='input1-signin-03'>
-    //                       Name
-    //                     </label>
-    //                     <input
-    //                       value={props.values.name}
-    //                       onChange={props.handleChange('name')}
-    //                       className='form-control my-3 bg-light'
-    //                       id='input1-signin-03'
-    //                       type='text'
-    //                       placeholder='Enter Product Name'
-    //                     />
-    //                     <label className='sr-only' htmlFor='input2-signin-03'>
-    //                       Price
-    //                     </label>
-    //                     <input
-    //                       value={props.values.price}
-    //                       onChange={props.handleChange('price')}
-    //                       className='form-control my-3 bg-light'
-    //                       id='input2-signin-03'
-    //                       type='text'
-    //                       placeholder='Enter Product Price'
-    //                     />
-    //                     <label htmlFor='input2-signin-03'>Image</label>
-    //                     <input
-    //                       onChange={e =>
-    //                         dispatch(
-    //                           productFileImageUploadAction(e.target.files[0])
-    //                         )
-    //                       }
-    //                       className='form-control my-3 bg-gray-200'
-    //                       id='input2-signin-03'
-    //                       type='file'
-    //                       placeholder='Image'
-    //                     />
-    //                     <label className='sr-only' htmlFor='input2-signin-03'>
-    //                       Brand
-    //                     </label>
-    //                     <input
-    //                       value={props.values.brand}
-    //                       onChange={props.handleChange('brand')}
-    //                       className='form-control my-3 bg-light'
-    //                       id='input2-signin-03'
-    //                       type='text'
-    //                       placeholder='Enter Product Brand'
-    //                     />
-    //                     <label className='sr-only' htmlFor='input2-signin-03'>
-    //                       category
-    //                     </label>
-    //                     <input
-    //                       value={props.values.category}
-    //                       onChange={props.handleChange('category')}
-    //                       className='form-control my-3 bg-light'
-    //                       id='input2-signin-03'
-    //                       type='text'
-    //                       placeholder='Enter Product Category'
-    //                     />
-
-    //                     <label className='sr-only' htmlFor='input2-signin-03'>
-    //                       In Stock
-    //                     </label>
-    //                     <input
-    //                       value={props.values.countInStock}
-    //                       onChange={props.handleChange('countInStock')}
-    //                       className='form-control my-3 bg-light'
-    //                       id='input2-signin-03'
-    //                       type='text'
-    //                       placeholder='Enter Count in Stock'
-    //                     />
-    //                     <label className='sr-only' htmlFor='input2-signin-03'>
-    //                       description
-    //                     </label>
-    //                     <input
-    //                       value={props.values.description}
-    //                       onChange={props.handleChange('description')}
-    //                       className='form-control my-3 bg-light'
-    //                       id='input2-signin-03'
-    //                       type='text'
-    //                       placeholder='Enter Product Description'
-    //                     />
-
-    //                     <label className='sr-only' htmlFor='input2-signin-03'>
-    //                       numReviews
-    //                     </label>
-    //                     <input
-    //                       value={props.values.numReviews}
-    //                       onChange={props.handleChange('numReviews')}
-    //                       className='form-control my-3 bg-light'
-    //                       id='input2-signin-03'
-    //                       type='text'
-    //                       placeholder='Enter Number of reviews'
-    //                     />
-
-    //                     <button
-    //                       className={`btn btn-primary btn-block py-2 my-3 ${
-    //                         loading && !file && 'disabled'
-    //                       }`}>
-    //                       update Product
-    //                     </button>
-    //                   </div>
-    //                 </div>
-    //               </div>
-    //             </form>
-    //             <button
-    //               onClick={() => {
-    //                 dispatch(deleteProductAction(match.params.id));
-    //                 history.push('/admin/fetchproducts');
-    //               }}
-    //               className={` text-white bg-red-800 btn-block py-2 my-3 ${
-    //                 loading && !file && 'disabled'
-    //               }`}>
-    //               Delete Product
-    //             </button>
-    //           </>
-    //         );
-    //       }}
-    //     </Formik>
-    //   )}
-    // </>
-
     <>
       <Formik
         initialValues={{
@@ -352,14 +213,14 @@ const AdminEditProduct = ({ history, match }) => {
                     <div className='mt-4'>
                       <button
                         type='submit'
-                        class='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
-                        Create Product
+                        class='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-yellow-600 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                        Update product
                       </button>
                     </div>
 
                     <div className='mt-4'>
                       <button
-                        onClick={dispatch(deleteProductAction(match.params.id))}
+                        onClick={confirmDeleteProduct}
                         type='submit'
                         class='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                         Delete product

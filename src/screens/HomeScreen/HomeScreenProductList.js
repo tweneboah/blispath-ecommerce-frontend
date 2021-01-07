@@ -21,7 +21,9 @@ const HomeScreenProductList = () => {
   return (
     <div className='home_product_list_grid_section'>
       <div className='home_product_list_title_div w-container'>
-        <h1 className='product_heading'>Latest Products</h1>
+        <h1 className='product_heading text-gray-600 font-semi-bold capitalize font-mono'>
+          Latest Products
+        </h1>
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </div>
       <div className='w-layout-grid home_product_list_grid'>
@@ -42,9 +44,15 @@ const HomeScreenProductList = () => {
                     className='product_img'
                   />
                 </Link>
-                <h1 className='product_title'>{product?.name}</h1>
-                <p className='product_desc'>{product?.description}</p>
-                <h1 className='product_price'>GHS {product?.price}</h1>
+                <h1 className='text-2xl font-bold text-gray-600'>
+                  {product?.name}
+                </h1>
+                <p className='product_desc font-normal'>
+                  {product?.description}
+                </p>
+                <h1 className='text-3xl font-semibold text-red-600'>
+                  GHS {product?.price}
+                </h1>
                 {productLasteDateCreated > dateNow && (
                   <div className='new_product_tag'>New </div>
                 )}

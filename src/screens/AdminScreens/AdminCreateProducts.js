@@ -50,7 +50,7 @@ const AdminCreateProducts = ({ history, match }) => {
           image: [],
         }}
         onSubmit={values => {
-          //dispatch(createProductAction(values));
+          dispatch(createProductAction(values));
           console.log(values);
         }}
         validationSchema={formSchema}>
