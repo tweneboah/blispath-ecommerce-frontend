@@ -30,8 +30,8 @@ const PhonesAndAccessoriesCategories = () => {
             <h2 class='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
               Phones and Accessories - ({phonesAndAccessories?.length})
             </h2>
-            <p class='mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4'>
-              Out latest Phones and Accessories collection
+            <p class='mt-3 max-w-2xl mx-auto text-xl pb-6 pt-2 text-gray-500 sm:mt-4'>
+              Our latest Phones and Accessories collection
             </p>
             {/* Search input */}
             <div className='text-center flex justify-center'>
@@ -51,7 +51,7 @@ const PhonesAndAccessoriesCategories = () => {
             </div>
           </div>
           <div className='text-2xl text-center text-red-800 pt-4'>
-            {phonesAndAccessories?.length === 0 ? (
+            {phonesAndAccessories?.length === 0 && !loading ? (
               <a className='text-blue-800' href='mailto:e.tweneboah1@gmail.com'>
                 No product. contact the store owner to make pre order
               </a>

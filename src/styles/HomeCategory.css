@@ -36,13 +36,13 @@
       from(rgba(0, 0, 0, 0.38)),
       to(rgba(0, 0, 0, 0.38))
     ),
-    url('../images/cat1.png');
+    url('../images/lappp.png');
   background-image: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.38),
       rgba(0, 0, 0, 0.38)
     ),
-    url('../images/cat1.png');
+    url('../images/lappp.png');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
   box-shadow: 7px 7px 17px -7px #000;
@@ -79,12 +79,22 @@
 }
 
 .homescreen_category_column.category2 {
-  background-image: url('../images/cat1.png'),
-    -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.38)), to(rgba(0, 0, 0, 0.38)));
-  background-image: url('../images/cat1.png'),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.38));
-  background-position: 50% 50%, 0px 0px;
-  background-size: cover, auto;
+  background-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.38)),
+      to(rgba(0, 0, 0, 0.38))
+    ),
+    url('../images/men.png');
+  background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.38),
+      rgba(0, 0, 0, 0.38)
+    ),
+    url('../images/men.png');
+  background-position: 0px 0px, 50% 50%;
+  background-size: auto, cover;
 }
 
 .homescreen_category_column.categiry3 {
@@ -95,13 +105,13 @@
       from(rgba(0, 0, 0, 0.38)),
       to(rgba(0, 0, 0, 0.38))
     ),
-    url('../images/cat1.png');
+    url('../images/autoparts.png');
   background-image: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.38),
       rgba(0, 0, 0, 0.38)
     ),
-    url('../images/cat1.png');
+    url('../images/autoparts.png');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
   background-attachment: scroll, scroll;
@@ -115,13 +125,13 @@
       from(rgba(0, 0, 0, 0.38)),
       to(rgba(0, 0, 0, 0.38))
     ),
-    url('../images/cat1.png');
+    url('../images/phoness.png');
   background-image: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.38),
       rgba(0, 0, 0, 0.38)
     ),
-    url('../images/cat1.png');
+    url('../images/phoness.png');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
 }
@@ -134,13 +144,13 @@
       from(rgba(0, 0, 0, 0.38)),
       to(rgba(0, 0, 0, 0.38))
     ),
-    url('../images/cat1.png');
+    url('../images/homeappliances.png');
   background-image: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.38),
       rgba(0, 0, 0, 0.38)
     ),
-    url('../images/cat1.png');
+    url('../images/homeappliances.png');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
 }
@@ -153,13 +163,13 @@
       from(rgba(0, 0, 0, 0.38)),
       to(rgba(0, 0, 0, 0.38))
     ),
-    url('../images/cat1.png');
+    url('../images/hotsales.png');
   background-image: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.38),
       rgba(0, 0, 0, 0.38)
     ),
-    url('../images/cat1.png');
+    url('../images/hotsales.png');
   background-position: 0px 0px, 50% 50%;
   background-size: auto, cover;
 }

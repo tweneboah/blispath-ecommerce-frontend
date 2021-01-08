@@ -18,6 +18,7 @@ import HomeSlider from '../../components/HomeSlider';
 import HomeScreenCategory from './HomeScreenCategory';
 import HomeScreenProductList from './HomeScreenProductList';
 import HomeScreenFixedBackground from './HomeScreenFixedBackground';
+import HomeScreenFreeShipping from './HomeScreenFreeShipping';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const HomeScreen = () => {
       <HomeScreenCategory />
       <HomeScreenProductList />
       <HomeScreenFixedBackground />
+      <HomeScreenFreeShipping />
     </div>
   );
 };

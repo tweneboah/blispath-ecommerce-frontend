@@ -70,16 +70,21 @@ const Header = () => {
                   class='dropdownlinkitem navlinkitem w-dropdown-link'>
                   <div className='text-white'>Hot Deals</div>
                 </Link>
-
                 <Link
                   to='/phones-accessories'
                   class='dropdownlinkitem navlinkitem w-dropdown-link'>
                   <div className='text-white'>Phone Accessories</div>
                 </Link>
+
                 <Link
                   to='/laptops-accessories'
                   class='dropdownlinkitem navlinkitem w-dropdown-link'>
                   <div className='text-white'>Laptops Accessories</div>
+                </Link>
+                <Link
+                  to='/home-appliances'
+                  class='dropdownlinkitem navlinkitem w-dropdown-link'>
+                  <div className='text-white'>Home Appliances</div>
                 </Link>
               </nav>
             </div>

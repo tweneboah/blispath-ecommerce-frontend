@@ -5,7 +5,6 @@ import { fetchAllProductsAction } from '../../redux/actions/productActions';
 import ErrorMessage from '../ErrorMessage';
 
 import Loading from '../Loading';
-import Ratings from '../Ratings';
 
 const GentsCategories = () => {
   const dispatch = useDispatch();
@@ -27,10 +26,10 @@ const GentsCategories = () => {
         <div class='relative max-w-7xl mx-auto'>
           <div class='text-center'>
             <h2 class='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
-              Fashion products - ({gents?.length})
+              Gents products - ({gents?.length})
             </h2>
-            <p class='mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4'>
-              Out latest fashions collection
+            <p class='mt-3 pt-3 pb-6 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4'>
+              Our latest Gents collection
             </p>
             {/* Search input */}
             <div className='text-center flex justify-center'>
@@ -50,7 +49,7 @@ const GentsCategories = () => {
             </div>
           </div>
           <div className='text-2xl text-center text-red-800 pt-4'>
-            {gents?.length === 0 ? (
+            {gents?.length === 0 && !loading ? (
               <a className='text-blue-800' href='mailto:e.tweneboah1@gmail.com'>
                 No product. contact the store owner to make pre order
               </a>
@@ -102,10 +101,10 @@ const GentsCategories = () => {
                             {product.description}
                           </p>
 
-                          <Ratings
+                          {/* <Ratings
                             value={product.rating}
                             text={`${product.numReviews} Reviews`}
-                          />
+                          /> */}
                         </a>
                       </div>
                       <div class='mt-6 flex items-center'>

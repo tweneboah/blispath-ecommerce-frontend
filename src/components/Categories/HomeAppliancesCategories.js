@@ -28,10 +28,10 @@ const HomeAppliancesCategories = () => {
         <div class='relative max-w-7xl mx-auto'>
           <div class='text-center'>
             <h2 class='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
-              Fashion products - ({homeAppliances?.length})
+              Home Appliances products - ({homeAppliances?.length})
             </h2>
-            <p class='mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4'>
-              Out latest fashions collection
+            <p class='mt-3 max-w-2xl mx-auto text-xl pb-6  text-gray-500 sm:mt-4'>
+              Our latest Home Appliances collection
             </p>
             {/* Search input */}
             <div className='text-center flex justify-center'>
@@ -51,7 +51,7 @@ const HomeAppliancesCategories = () => {
             </div>
           </div>
           <div className='text-2xl text-center text-red-800 pt-4'>
-            {homeAppliances?.length === 0 ? (
+            {homeAppliances?.length === 0 && !loading ? (
               <a className='text-blue-800' href='mailto:e.tweneboah1@gmail.com'>
                 No product. contact the store owner to make pre order
               </a>

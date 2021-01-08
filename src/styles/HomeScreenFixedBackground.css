@@ -8,7 +8,7 @@
 }
 
 .homescreen_big_img_column {
-  background-image: url('../images/shoe.png');
+  background-image: url('../images/promo6.jpg');
   background-position: 50% 50%;
   background-size: cover;
 }
@@ -35,7 +35,7 @@
 
 .homescreen_fixed_bg {
   height: 30em;
-  background-image: url('../images/p2.jpg');
+  background-image: url('../images/fixedbG.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-attachment: fixed;
