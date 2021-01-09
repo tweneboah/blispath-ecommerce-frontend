@@ -24,7 +24,7 @@ const PhonesAndAccessoriesCategories = () => {
   console.log(productList);
   return (
     <>
-      <div class='relative bg-gray-200 pt-16 -ml-9 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8'>
+      <div class='relative  min-h-screen bg-gray-200 pt-16 -ml-9 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8'>
         <div class='relative max-w-7xl mx-auto'>
           <div class='text-center'>
             <h2 class='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
@@ -38,7 +38,7 @@ const PhonesAndAccessoriesCategories = () => {
               <input
                 onChange={e => dispatch(fetchAllProductsAction(e.target.value))}
                 type='text'
-                class='py-2 bg-gray-100 px-3 text-center border  focus:ring-indigo-500 focus:border-green-500 block w-1/4 sm:text-sm border-gray-500 rounded-md'
+                class='py-3 w-full bg-gray-100   text-center border shadow-xl focus:ring-indigo-500 focus:border-yellow-500 block  sm:text-sm ml-7 border-gray-500 rounded-md'
                 placeholder='Search for product'
               />
             </div>

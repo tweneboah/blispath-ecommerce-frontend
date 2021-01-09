@@ -40,8 +40,9 @@ const OrderScreen = ({ match, history }) => {
   ) : error ? (
     <Message variant='danger' />
   ) : (
-    <>
+    <div className='h-screen'>
       <h1>Order ID {order._id}</h1>
+
       <Row>
         <Col md={8}>
           <ListGroup variant='flush'>
@@ -170,7 +171,7 @@ const OrderScreen = ({ match, history }) => {
           </Card>
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 

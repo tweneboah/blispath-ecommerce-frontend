@@ -13,7 +13,7 @@ const Dashboard = ({ history }) => {
     if (userInfo && !userInfo.isAdmin) history.pushState('/profile');
   });
   return (
-    <div>
+    <div className='min-h-screen'>
       <h1 className='text-center text-3xl capitalize m-4'>Store overviews</h1>
       <div class='flex flex-wrap -mx-4 -mb-4 md:mb-0 '>
         <div class='w-full md:w-1/2 px-4 mb-4 md:mb-0'>

@@ -6,6 +6,8 @@ import { MdUpdate } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllOrdersAction } from '../../redux/actions/orderActions';
 import { getUserDetailsAction } from '../../redux/actions/userAction';
+import { Link } from 'react-router-dom';
+import { fetchAllProductsAction } from '../../redux/actions/productActions';
 
 const AdminAllOrdersScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -30,11 +32,21 @@ const AdminAllOrdersScreen = ({ history }) => {
   }, [dispatch]);
 
   //Get all orders
-
   const allOrders = useSelector(state => state.allOrders);
   const { loading, orders, error } = allOrders;
-  console.log(orders);
 
+  //Get all products
+  //We need to pass an empty string because it's base on our query
+  useEffect(() => {
+    dispatch(fetchAllProductsAction(''));
+  }, []);
+
+  const productList = useSelector(state => state.productList);
+  const {
+    loading: productLoading,
+    products,
+    error: productError,
+  } = productList;
   //=======
   //TOTAL ORDERS
   //======
@@ -84,9 +96,9 @@ const AdminAllOrdersScreen = ({ history }) => {
               <div class='h-full'>
                 <div class='text-center p-4 mb-2 bg-red-400 text-white rounded'>
                   <h3 class='text-3xl leading-tight  font-heading font-semibold'>
-                    GHS 0.0
+                    {products?.length}
                   </h3>
-                  <span class='leading-none'>Refunds</span>
+                  <span class='leading-none'>Total Products</span>
                 </div>
               </div>
             </div>
@@ -97,7 +109,9 @@ const AdminAllOrdersScreen = ({ history }) => {
                 <th class='border-t px-2 py-2' scope='col'>
                   Order Id
                 </th>
-
+                <th class='border-t px-2 py-2' scope='col'>
+                  Customer
+                </th>
                 <th class='border-t px-2 py-2' scope='col'>
                   Date
                 </th>
@@ -123,13 +137,20 @@ const AdminAllOrdersScreen = ({ history }) => {
                 console.log(order);
                 return (
                   <tr>
-                    <td class='border-t px-2 py-2'>{order._id}</td>
+                    <td class='border-t px-2 py-2'>
+                      <Link to={`/order/${order?._id}`}>{order._id}</Link>
+                    </td>
+
+                    <td class='border-t px-2 py-2'>
+                      <Link to={`/order/${order?._id}`}>{userInfo?.name}</Link>
+                    </td>
+
                     <td class='border-t px-2 py-2'>
                       <Moment fromNow>{order?.createdAt}</Moment>
                     </td>
-                    <td class='border-t px-2 py-2'>{order.totalPrice}</td>
+                    <td class='border-t px-2 py-2'>{order?.totalPrice}</td>
 
-                    <td class='border-t px-2 py-2'>{order.createdAt}</td>
+                    <td class='border-t px-2 py-2'>{order?.createdAt}</td>
                     <td class='text-center border-t px-2 py-2'>
                       {order.isPaid ? (
                         // order.paidAt.substring(0, 10)
@@ -143,7 +164,7 @@ const AdminAllOrdersScreen = ({ history }) => {
                       )}
                     </td>
                     <td class='text-center border-t px-2 py-2'>
-                      {!order.isDelivered ? (
+                      {!order?.isDelivered ? (
                         <span class='inline-block text-sm py-1 px-3 rounded-full text-white bg-red-500'>
                           Not delivered
                         </span>
@@ -158,7 +179,7 @@ const AdminAllOrdersScreen = ({ history }) => {
                       <MdUpdate
                         className='text-3xl text-yellow-200 cursor-pointer ml-8'
                         onClick={() =>
-                          history.push(`/admin/updatetoorder/${order._id}`)
+                          history.push(`/admin/updatetoorder/${order?._id}`)
                         }
                       />
                     </td>

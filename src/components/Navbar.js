@@ -40,7 +40,7 @@ const Header = () => {
             <Link to='/contact' class='navlinkitem w-nav-link '>
               <div className='text-white'>Contact</div>
             </Link>
-            <Link to='/contact' class='navlinkitem w-nav-link '>
+            <Link to='/products' class='navlinkitem w-nav-link '>
               <div className='text-white'>Products</div>
             </Link>
 
@@ -126,7 +126,7 @@ const Header = () => {
                   <Link
                     to='/profile'
                     class='dropdownlinkitem navlinkitem w-dropdown-link'>
-                    <div className='text-white'>Profile</div>
+                    <div className='text-white'>My Orders</div>
                   </Link>
 
                   <Link

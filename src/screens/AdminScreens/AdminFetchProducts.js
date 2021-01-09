@@ -25,7 +25,7 @@ const AdminFetchProducts = ({ history }) => {
     <>
       <div className='flex flex-col min-h-screen mt-16'>
         <h1 className='text-center text-3xl capitalize font-extrabold'>
-          All Products
+          All Products - ({products?.length})
         </h1>
         <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
@@ -96,9 +96,7 @@ const AdminFetchProducts = ({ history }) => {
 
                       <td className='px-2 py-2 whitespace-nowrap'>
                         <Link to={`/admin/edit/product/${product._id}`}>
-                          <button variant='light' className='btn-sm'>
-                            <i className='fas fa-edit'></i>
-                          </button>
+                          <i className='fas fa-edit '></i>
                         </Link>
                       </td>
                     </tr>

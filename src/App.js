@@ -36,6 +36,8 @@ import AutoPartsCategories from './components/Categories/AutoPartsCategories';
 import LaptopsAndAccessoriesCategories from './components/Categories/LaptopsAndAccessoriesCategories';
 import PhonesAndAccessoriesCategories from './components/Categories/PhoneAccessoriesCategories';
 import Dashboard from './components/Admins/Dashboard';
+import AllProductsList from './screens/AllProductsList';
+import PaymentSuccess from './components/PaymentSuccess';
 
 const App = () => {
   return (
@@ -45,6 +47,8 @@ const App = () => {
         <Switch>
           <Route exact path='/' component={HomeScreen} />
           <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/products' component={AllProductsList} />
+          <Route exact path='/payment-success' component={PaymentSuccess} />
           {/* Categories */}
           <Route exact path='/fashions' component={FashionCategories} />
           <Route exact path='/gents' component={GentsCategories} />
