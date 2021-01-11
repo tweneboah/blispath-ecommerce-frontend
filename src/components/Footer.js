@@ -17,7 +17,7 @@ const Footer = () => {
 
           <div class='px-5 py-2'>
             <Link
-              to='/contack'
+              to='/contact'
               class='text-base text-gray-200 hover:text-yellow-300'>
               Contact
             </Link>
@@ -27,7 +27,7 @@ const Footer = () => {
             <Link
               to='/policy'
               class='text-base text-gray-200 hover:text-yellow-300'>
-              Policies
+              Policies and Privacy
             </Link>
           </div>
 
@@ -41,21 +41,24 @@ const Footer = () => {
 
           <div class='px-5 py-2'>
             <Link
-              to='/about'
+              to='/login'
               class='text-base text-gray-200 hover:text-yellow-300'>
-              About
+              Login
             </Link>
           </div>
           <div class='px-5 py-2'>
             <Link
-              to='/faq'
+              to='/products'
               class='text-base text-gray-200 hover:text-yellow-300'>
-              FAQ
+              Products
             </Link>
           </div>
         </nav>
         <div class='mt-8 flex justify-center space-x-6'>
-          <a href='#' class='text-gray-400 hover:text-gray-500'>
+          <a
+            target='_blank'
+            href='https://www.facebook.com/blisspathcons'
+            class='text-gray-400 hover:text-gray-500'>
             <span class='sr-only'>Facebook</span>
             <svg
               class='h-6 w-6'

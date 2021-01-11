@@ -119,9 +119,8 @@ const createProductAction = productData => async (dispatch, getState) => {
     formProductData.append('countInStock', productData.countInStock);
     formProductData.append('numReviews', productData.numReviews);
     formProductData.append('description', productData.description);
-    console.log(productData.image);
 
-    for (var i = 0; i < productData.image.length; i++) {
+    for (let i = 0; i < productData.image.length; i++) {
       formProductData.append('image', productData.image[i]);
     }
 

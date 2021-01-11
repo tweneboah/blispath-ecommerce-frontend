@@ -41,7 +41,7 @@ const ProfileScreen = ({ location, history }) => {
     }, 0);
 
   return (
-    <div className='h-screen'>
+    <div className='h-full'>
       {/* Profile details container */}
       <div>{profileError && <ErrorMessage>{profileError}</ErrorMessage>}</div>
 
@@ -125,7 +125,7 @@ const ProfileScreen = ({ location, history }) => {
             </div>
           </div>
 
-          <section class='py-8 px-4 min-h-screen'>
+          <section class='py-8 px-4 '>
             {/* Statistics card */}
             <div class='flex flex-wrap -mx-4 -mb-4 md:mb-0'>
               <div class='w-full md:w-1/2 px-4 mb-4 md:mb-0 text-center '>

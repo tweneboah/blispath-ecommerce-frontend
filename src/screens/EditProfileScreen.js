@@ -51,10 +51,14 @@ const EditProfileScreen = ({ history, match }) => {
           return (
             <div className='min-h-1/2 bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
               <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-                {loading && <Loader />}
                 {error && <ErrorMessage>{error}</ErrorMessage>}
 
                 <h2 className='mt-6 text-center text-xl font-extrabold text-gray-900'>
+                  {userProfileLoading && (
+                    <h1 className='capitalize font-semibold text-3xl mt-4 text-green-800'>
+                      Loading please wait
+                    </h1>
+                  )}
                   {userInfo && (
                     <p className='capitalize'>
                       {userInfo.name} do you want to update your details?
@@ -68,7 +72,9 @@ const EditProfileScreen = ({ history, match }) => {
                       <SuccessMessage>
                         Successfully Updated. Loing back to see your update
                       </SuccessMessage>
-                      <p>You will be redirected shortly....😊</p>
+                      <p className='text-2xl'>
+                        You will be redirected shortly....😊
+                      </p>
                     </>
                   )}
                 </p>

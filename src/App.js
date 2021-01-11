@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
+import { Switch } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
@@ -11,11 +11,12 @@ import ProfileScreen from './screens/ProfileScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import PlaceOrderScreenOld from './screens/PlaceOrderScreenOld';
 import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UsersListScreen';
 import AdminCreateProducts from './screens/AdminScreens/AdminCreateProducts';
 import AdminFetchProducts from './screens/AdminScreens/AdminFetchProducts';
-import { Switch } from 'react-router-dom';
+
 import MakePayment from './components/MakePayment';
 import AdminAllOrdersScreen from './screens/AdminScreens/AdminAllOrdersScreen';
 import AdminUpdateOrderToDeliverScreen from './screens/AdminScreens/AdminUpdateOrderToDeliverScreen';
@@ -38,6 +39,8 @@ import PhonesAndAccessoriesCategories from './components/Categories/PhoneAccesso
 import Dashboard from './components/Admins/Dashboard';
 import AllProductsList from './screens/AllProductsList';
 import PaymentSuccess from './components/PaymentSuccess';
+import PrivacyAndPolicy from './components/PrivacyAndPolicy';
+import TermsAndConditions from './components/TermsAndConditions';
 
 const App = () => {
   return (
@@ -47,8 +50,11 @@ const App = () => {
         <Switch>
           <Route exact path='/' component={HomeScreen} />
           <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/policy' component={PrivacyAndPolicy} />
+          <Route exact path='/terms' component={TermsAndConditions} />
           <Route exact path='/products' component={AllProductsList} />
           <Route exact path='/payment-success' component={PaymentSuccess} />
+          <Route exact path='/order2' component={PlaceOrderScreenOld} />
           {/* Categories */}
           <Route exact path='/fashions' component={FashionCategories} />
           <Route exact path='/gents' component={GentsCategories} />

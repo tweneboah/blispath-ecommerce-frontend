@@ -12,11 +12,6 @@ import { productFileImageUploadAction } from '../../redux/actions/productFileIma
 const AdminEditProduct = ({ history, match }) => {
   const dispatch = useDispatch();
 
-  //===================IMAGE UPLOAD=================
-  //File Upload Logic
-  const productImageUploaded = useSelector(state => state.productImageUploaded);
-  const { loading, file, error } = productImageUploaded;
-
   //======FETCH ALL PRODUCTS==================
 
   useEffect(() => {
@@ -24,6 +19,13 @@ const AdminEditProduct = ({ history, match }) => {
   }, [match.params.id]);
   const productList = useSelector(state => state.productList);
 
+  //updated product state
+  const updateProduct = useSelector(state => state.updateProduct);
+  const {
+    loading: updateProductLoading,
+    error: updateProductError,
+    success,
+  } = updateProduct;
   const { products } = productList;
   //find the particular product whos id is in the param and populate it in the form
   const product =
@@ -37,6 +39,10 @@ const AdminEditProduct = ({ history, match }) => {
     if (isDelete) dispatch(deleteProductAction(match.params.id));
     history.push('/admin/fetchproducts');
   };
+
+  useEffect(() => {
+    if (success) history.push('/admin/fetchproducts');
+  }, [success]);
   return (
     <>
       <Formik
@@ -50,8 +56,6 @@ const AdminEditProduct = ({ history, match }) => {
           description: product && product.description,
         }}
         onSubmit={values => {
-          console.log(values.image);
-
           dispatch(updateProductAction(match.params.id, values));
         }}>
         {props => {
@@ -68,13 +72,15 @@ const AdminEditProduct = ({ history, match }) => {
                     update Product
                   </h2>
                   <div>
-                    {loading && (
+                    {updateProductLoading && (
                       <p class='text-lg text-pink-500'>
-                        Product is creating please wait....
+                        Product is updating please wait....
                       </p>
                     )}
-                    {error && (
-                      <p class='text-lg bg-gray-200 text-red-600'>{error}</p>
+                    {updateProductError && (
+                      <p class='text-lg bg-gray-200 text-red-600'>
+                        {updateProductError}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -151,6 +157,7 @@ const AdminEditProduct = ({ history, match }) => {
                             <option>Gents</option>
                             <option>Ladies</option>
                             <option>Hot Deals</option>
+                            <option>Auto Parts</option>
                             <option>Phone Accessories</option>
                             <option>Laptops and Accessories</option>
                             <option>Home Appliances</option>
@@ -213,7 +220,7 @@ const AdminEditProduct = ({ history, match }) => {
                     <div className='mt-4'>
                       <button
                         type='submit'
-                        class='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-yellow-600 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                        class='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-green-600 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                         Update product
                       </button>
                     </div>
