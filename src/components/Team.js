@@ -3,6 +3,8 @@ import team1 from '../images/team1.jpeg';
 import team2 from '../images/team2.jpeg';
 import team3 from '../images/team3.jpeg';
 import team4 from '../images/antwi.jpg';
+import team5 from '../images/emm.jpeg';
+
 const Team = () => {
   return (
     <div class='bg-gray-200 -ml-9'>
@@ -108,6 +110,22 @@ const Team = () => {
                   <div class='text-lg leading-6 font-medium space-y-1'>
                     <h3>Antwi Agyemang Armstrong</h3>
                     <p class='text-indigo-600'>Sales Manager</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class='space-y-6'>
+                <img
+                  class='mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56'
+                  src={team5}
+                  alt=''
+                />
+                <div class='space-y-2'>
+                  <div class='text-lg leading-6 font-medium space-y-1'>
+                    <h3>Emmanuel Tweneboah</h3>
+                    <p class='text-indigo-600'>Software Developer</p>
                   </div>
                 </div>
               </div>

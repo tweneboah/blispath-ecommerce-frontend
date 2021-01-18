@@ -10,6 +10,13 @@ const Header = () => {
   const { userInfo } = userLogin;
   const dispatch = useDispatch();
 
+  //================================================================
+  //GET CARTS IN Store
+  //================================================================
+
+  const cart = useSelector(state => state.cart);
+  const { cartItems } = cart;
+  console.log(cartItems);
   const logoutHandler = () => {
     dispatch(logoutAction());
   };
@@ -34,9 +41,7 @@ const Header = () => {
             <Link to='/about' class='navlinkitem w-nav-link'>
               About
             </Link>
-            <Link to='/team' class='navlinkitem w-nav-link'>
-              Our Team
-            </Link>
+
             <Link to='/contact' class='navlinkitem w-nav-link '>
               <div className='text-white'>Contact</div>
             </Link>
@@ -105,6 +110,23 @@ const Header = () => {
                   class='register_button w-button'>
                   Logout
                 </button>
+                <Link to='/cart'>
+                  <span class='inline-block relative ml-2'>
+                    <svg
+                      class='h-8 text-yellow-900'
+                      xmlns='http://www.w3.org/2000/svg'
+                      viewBox='0 0 20 20'
+                      fill='currentColor'>
+                      <path d='M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z' />
+                    </svg>
+                    {/* <div class='absolute top-0 right-0 block h-3 w-3 rounded-full ring-2 ring-white bg-green-400'>
+                    <span class='text-center  pb-4'> 6</span>
+                  </div> */}
+                    <div class='absolute top-0 -mt-3 rounded-full font-semibold right-0 text-blue-100 text-lg   text-center'>
+                      {cartItems?.length}
+                    </div>
+                  </span>
+                </Link>
               </>
             )}
             {userInfo && (
