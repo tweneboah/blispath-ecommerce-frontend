@@ -16,10 +16,7 @@ const OrderScreen = ({ match, history }) => {
   const orderDetails = useSelector(state => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
-  // useEffect(() => {
-  //   dispatch(getOrderDetailsActon(match.params.id));
-  // }, [match]);
-
+  console.log(order);
   useEffect(() => {
     if (!order || order._id !== match.params.id) {
       dispatch(getOrderDetailsActon(match.params.id));
@@ -40,7 +37,7 @@ const OrderScreen = ({ match, history }) => {
   ) : error ? (
     <Message variant='danger' />
   ) : (
-    <div className='h-screen'>
+    <div>
       <p class='text-center mt-3 text-2xl font-semibold bg-red-900 text-gray-200'>
         Keep note of your Order ID {order._id}
       </p>
@@ -159,7 +156,17 @@ const OrderScreen = ({ match, history }) => {
                         <th
                           scope='col'
                           class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                          Title
+                          Color
+                        </th>
+                        <th
+                          scope='col'
+                          class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                          Size
+                        </th>
+                        <th
+                          scope='col'
+                          class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                          summary
                         </th>
                       </tr>
                     </thead>
@@ -176,6 +183,61 @@ const OrderScreen = ({ match, history }) => {
                                     <div class='text-sm font-medium text-gray-900'>
                                       <Link to={`/product/${item.product}`}>
                                         {item.name}
+                                      </Link>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class='px-6 py-3  whitespace-nowrap'>
+                                <div class='flex items-center'>
+                                  <div class='ml-4'>
+                                    <div class='text-sm font-medium text-gray-900'>
+                                      <Link to={`/product/${item.product}`}>
+                                        <div>
+                                          {' '}
+                                          {item.color ? (
+                                            item.color
+                                          ) : (
+                                            <svg
+                                              class='h-4 text-red-700 font-bold'
+                                              xmlns='http://www.w3.org/2000/svg'
+                                              viewBox='0 0 20 20'
+                                              fill='currentColor'>
+                                              <path
+                                                fill-rule='evenodd'
+                                                d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                                                clip-rule='evenodd'
+                                              />
+                                            </svg>
+                                          )}
+                                        </div>
+                                      </Link>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class='px-6 py-3  whitespace-nowrap'>
+                                <div class='flex items-center'>
+                                  <div class='ml-4'>
+                                    <div class='text-sm font-medium text-gray-900'>
+                                      <Link to={`/product/${item.product}`}>
+                                        <div>
+                                          {item.size ? (
+                                            item.size
+                                          ) : (
+                                            <svg
+                                              class='h-4 text-red-700 font-bold'
+                                              xmlns='http://www.w3.org/2000/svg'
+                                              viewBox='0 0 20 20'
+                                              fill='currentColor'>
+                                              <path
+                                                fill-rule='evenodd'
+                                                d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                                                clip-rule='evenodd'
+                                              />
+                                            </svg>
+                                          )}
+                                        </div>
                                       </Link>
                                     </div>
                                   </div>

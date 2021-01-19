@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import ImageGallery from 'react-image-gallery';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,6 +10,9 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 
 const ProductScreen = ({ match, history }) => {
+  const [color, setColor] = useState('');
+  const [size, setSize] = useState('');
+  const [greenColor, setGreenColor] = useState('');
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
 
@@ -35,7 +39,9 @@ const ProductScreen = ({ match, history }) => {
   }
   //This will send to cart page but it will send the product id and qty as a query params
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+    history.push(
+      `/cart/${match.params.id}?qty=${qty}&color=${color}&size=${size}`
+    );
   };
 
   return (
@@ -43,7 +49,7 @@ const ProductScreen = ({ match, history }) => {
       <Link to='/'>
         <button class='bg-red-600 mt-4 px-3 py-2 text-xl rounded-l-full text-gray-100 hover:bg-red-300'>
           {' '}
-          Go Back
+          Go Backss
         </button>
       </Link>
       {loading ? (
@@ -53,7 +59,7 @@ const ProductScreen = ({ match, history }) => {
           <Message variant='danger'>{error}</Message>
         )
       ) : (
-        <section class='py-12 px-4'>
+        <section class='py-12 px-4 bg-gray-200'>
           <div class='flex flex-wrap -mx-4'>
             <div class='lg:w-1/2 px-4 mb-4 lg:mb-0'>
               {productImages && (
@@ -106,6 +112,74 @@ const ProductScreen = ({ match, history }) => {
                 )}
               </div>
 
+              <h1>Selected Color:{color ? color : 'No color selected'}</h1>
+              <div className='flex justify-start m-2 '>
+                <div
+                  className='cursor-pointer'
+                  onClick={() => setColor('red')}
+                  style={{
+                    backgroundColor: 'red',
+                    height: '20px',
+                    width: '20px',
+                    marginRight: '10px',
+                  }}></div>
+                <div
+                  onClick={() => setColor('black')}
+                  className='cursor-pointer'
+                  style={{
+                    backgroundColor: 'black',
+                    height: '20px',
+                    width: '20px',
+                    marginRight: '10px',
+                  }}></div>
+
+                <div
+                  onClick={() => setColor('white')}
+                  className='cursor-pointer'
+                  style={{
+                    backgroundColor: 'white',
+                    height: '20px',
+                    width: '20px',
+                    marginRight: '10px',
+                  }}></div>
+                <div
+                  onClick={() => setColor('green')}
+                  className='cursor-pointer'
+                  style={{
+                    backgroundColor: 'green',
+                    height: '20px',
+                    width: '20px',
+                  }}></div>
+              </div>
+
+              <h1>Selected Size:{size ? size : 'No size selected'}</h1>
+              <div className='flex justify-start'>
+                <div
+                  className='border-2 border-gray-300 p-1 mr-2  cursor-pointer'
+                  onClick={() => setSize('S')}>
+                  S
+                </div>
+                <div
+                  className='border-2 border-gray-300 p-1 mr-2  cursor-pointer'
+                  onClick={() => setSize('M')}>
+                  M
+                </div>
+                <div
+                  className='border-2 border-gray-300 p-1 mr-2  cursor-pointer'
+                  onClick={() => setSize('L')}>
+                  L
+                </div>
+                <div
+                  className='border-2 border-gray-300 p-1 mr-2  cursor-pointer'
+                  onClick={() => setSize('XL')}>
+                  XL
+                </div>
+                <div
+                  className='border-2 border-gray-300 p-1 mr-2  cursor-pointer'
+                  onClick={() => setSize('XXL')}>
+                  XXL
+                </div>
+              </div>
               <div className='flex justify-around'>
                 <button
                   onClick={addToCartHandler}

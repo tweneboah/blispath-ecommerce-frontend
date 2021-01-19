@@ -16,7 +16,7 @@ const Header = () => {
 
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart;
-  console.log(cartItems);
+
   const logoutHandler = () => {
     dispatch(logoutAction());
   };
@@ -105,13 +105,8 @@ const Header = () => {
               </>
             ) : (
               <>
-                <button
-                  onClick={() => logoutHandler()}
-                  class='register_button w-button'>
-                  Logout
-                </button>
                 <Link to='/cart'>
-                  <span class='inline-block relative ml-2'>
+                  <span class='inline-block relative mr-2 mt-2'>
                     <svg
                       class='h-8 text-yellow-900'
                       xmlns='http://www.w3.org/2000/svg'
@@ -127,6 +122,11 @@ const Header = () => {
                     </div>
                   </span>
                 </Link>
+                <button
+                  onClick={() => logoutHandler()}
+                  class='register_button w-button'>
+                  Logout
+                </button>
               </>
             )}
             {userInfo && (

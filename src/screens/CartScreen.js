@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { MdDelete } from 'react-icons/md';
+import queryString from 'query-string';
 import { addToCart, removeFromCart } from '../redux/actions/cartActions';
 import Message from '../components/Message';
 
@@ -10,14 +10,20 @@ import Message from '../components/Message';
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params?.id;
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1;
+  // const qty = location.search ? Number(location.search.split('=')[1]) : 1;
   const dispatch = useDispatch();
 
+  const parsedQueryStrings = queryString.parse(location.search);
+  const qty = parseInt(parsedQueryStrings.qty);
+  const color = parsedQueryStrings.color;
+  const size = parsedQueryStrings.size;
+  console.log(typeof qty);
+  console.log(color);
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty));
+      dispatch(addToCart(productId, qty, color, size));
     }
-  }, [dispatch, productId, qty]);
+  }, [dispatch, productId]);
 
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart;
