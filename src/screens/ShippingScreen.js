@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { GrLocation } from 'react-icons/gr';
 import { saveShippingAddressAction } from '../redux/actions/cartActions';
-import CheckoutSteps from '../components/CheckoutSteps';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 const ShippingScreen = ({ history }) => {
@@ -29,8 +27,15 @@ const ShippingScreen = ({ history }) => {
         }}
         onSubmit={values => {
           console.log(values);
-          dispatch(saveShippingAddressAction(values));
-          history.push('/placeorder');
+          if (
+            !shippingAddress.region ||
+            shippingAddress.region === 'No region selected'
+          ) {
+            alert('Please enter your region');
+          } else {
+            dispatch(saveShippingAddressAction(values));
+            history.push('/placeorder');
+          }
         }}>
         {props => {
           return (
@@ -126,6 +131,7 @@ const ShippingScreen = ({ history }) => {
                           onChange={props.handleChange('region')}
                           name='category'
                           className='mt-1 block border w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'>
+                          <option value='Ashanti'>No region selected</option>
                           <option value='Ashanti'>Ashanti</option>
                           <option value='Western'>Western</option>
                           <option value='Northern'>Northern</option>
@@ -133,6 +139,7 @@ const ShippingScreen = ({ history }) => {
                           <option value='Accra'>Accra</option>
                           <option value='Brong Ahafo'>Brong Ahafo</option>
                           <option value='Volta'>Volta</option>
+                          <option value='Other'>Other</option>
                         </select>
                       </div>
                     </div>

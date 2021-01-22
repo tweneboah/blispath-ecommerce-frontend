@@ -119,9 +119,14 @@ const createProductAction = productData => async (dispatch, getState) => {
     formProductData.append('countInStock', productData.countInStock);
     formProductData.append('numReviews', productData.numReviews);
     formProductData.append('description', productData.description);
+    // formProductData.append('colors', productData.colors);
 
     for (let i = 0; i < productData.image.length; i++) {
       formProductData.append('image', productData.image[i]);
+    }
+
+    for (let i = 0; i < productData.colors.length; i++) {
+      formProductData.append('colors', productData.colors[i]);
     }
 
     const { data } = await axios.post(

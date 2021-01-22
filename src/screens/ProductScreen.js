@@ -26,7 +26,7 @@ const ProductScreen = ({ match, history }) => {
   const { loading, product, error } = productDetails;
 
   //Loop throught the images of the product and pass to the carousel component
-
+  console.log(product.colors);
   let productImages = [];
 
   if (!loading && product && !error) {
@@ -112,45 +112,30 @@ const ProductScreen = ({ match, history }) => {
                 )}
               </div>
 
-              <h1>Selected Color:{color ? color : 'No color selected'}</h1>
-              <div className='flex justify-start m-2 '>
-                <div
-                  className='cursor-pointer'
-                  onClick={() => setColor('red')}
-                  style={{
-                    backgroundColor: 'red',
-                    height: '20px',
-                    width: '20px',
-                    marginRight: '10px',
-                  }}></div>
-                <div
-                  onClick={() => setColor('black')}
-                  className='cursor-pointer'
-                  style={{
-                    backgroundColor: 'black',
-                    height: '20px',
-                    width: '20px',
-                    marginRight: '10px',
-                  }}></div>
-
-                <div
-                  onClick={() => setColor('white')}
-                  className='cursor-pointer'
-                  style={{
-                    backgroundColor: 'white',
-                    height: '20px',
-                    width: '20px',
-                    marginRight: '10px',
-                  }}></div>
-                <div
-                  onClick={() => setColor('green')}
-                  className='cursor-pointer'
-                  style={{
-                    backgroundColor: 'green',
-                    height: '20px',
-                    width: '20px',
-                  }}></div>
-              </div>
+              {product.category === 'Fashion' ||
+                ('Gents' && (
+                  <>
+                    <h1>
+                      Selected Color:{color ? color : 'No color selected'}
+                    </h1>
+                    <div className='flex justify-start m-2 '>
+                      {product.colors?.map(color => {
+                        console.log(color);
+                        return (
+                          <div
+                            className='cursor-pointer'
+                            onClick={() => setColor(color)}
+                            style={{
+                              backgroundColor: `${color}`,
+                              height: '20px',
+                              width: '20px',
+                              marginRight: '10px',
+                            }}></div>
+                        );
+                      })}
+                    </div>
+                  </>
+                ))}
 
               <h1>Selected Size:{size ? size : 'No size selected'}</h1>
               <div className='flex justify-start'>
