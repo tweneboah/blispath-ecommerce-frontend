@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Formik, withFormik, useFormik } from 'formik';
-import { connect } from 'react-redux';
+import { useFormik } from 'formik';
 import Dropzone from 'react-dropzone';
 import * as Yup from 'yup';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { createProductAction } from '../../redux/actions/productActions';
 import ColorsMultiSelect from './MultiSelection/ColorsMultiSelect';
+import SizeMultiSelect from './MultiSelection/SizeMultiSelect';
 
 const formSchema = Yup.object({
   colors: Yup.array()
+    .min(3, 'Pick at least 3 tags')
+    .of(
+      Yup.object().shape({
+        label: Yup.string().required(),
+        value: Yup.string().required(),
+      })
+    ),
+  sizes: Yup.array()
     .min(3, 'Pick at least 3 tags')
     .of(
       Yup.object().shape({
@@ -37,12 +45,13 @@ const AdminCreateProducts = props => {
       description: '',
       image: [],
       colors: [],
-      email: '',
+      sizes: [],
     },
     onSubmit: value => {
       const payload = {
         ...value,
         colors: value.colors.map(color => color.value),
+        sizes: value.sizes.map(size => size.value),
       };
 
       dispatch(createProductAction(payload));
@@ -249,6 +258,22 @@ const AdminCreateProducts = props => {
                     onBlur={formik.setFieldTouched}
                     error={formik.errors.colors}
                     touched={formik.touched.colors}
+                  />
+                </div>
+                <div className='text-red-500'>
+                  {formik.touched.countInStock && formik.errors.countInStock}
+                </div>
+              </div>
+
+              {/* Size select */}
+              <div>
+                <div className='mt-1'>
+                  <SizeMultiSelect
+                    value={formik.values.sizes}
+                    onChange={formik.setFieldValue}
+                    onBlur={formik.setFieldTouched}
+                    error={formik.errors.sizes}
+                    touched={formik.touched.sizes}
                   />
                 </div>
                 <div className='text-red-500'>

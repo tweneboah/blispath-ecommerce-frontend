@@ -112,59 +112,51 @@ const ProductScreen = ({ match, history }) => {
                 )}
               </div>
 
-              {product.category === 'Fashion' ||
-                ('Gents' && (
+              {product?.category === 'Fashion' || 'Gents' ? (
+                <>
+                  <h1>Selected Color:{color ? color : 'No color selected'}</h1>
+                  <div className='flex justify-start m-2 '>
+                    {product.colors?.map(color => {
+                      console.log(color);
+                      return (
+                        <button
+                          className='cursor-pointer'
+                          onClick={() => setColor(color)}
+                          style={{
+                            backgroundColor: `${color}`,
+                            height: '20px',
+                            width: '20px',
+                            marginRight: '10px',
+                          }}></button>
+                      );
+                    })}
+                  </div>
+                </>
+              ) : (
+                ''
+              )}
+
+              <h1>Selected Size:{size ? size : 'No size selected'}</h1>
+              <div className='flex justify-start'>
+                {product?.category === 'Fashion' || 'Gents' ? (
                   <>
-                    <h1>
-                      Selected Color:{color ? color : 'No color selected'}
-                    </h1>
                     <div className='flex justify-start m-2 '>
-                      {product.colors?.map(color => {
-                        console.log(color);
+                      {product.sizes?.map(size => {
                         return (
-                          <div
-                            className='cursor-pointer'
-                            onClick={() => setColor(color)}
-                            style={{
-                              backgroundColor: `${color}`,
-                              height: '20px',
-                              width: '20px',
-                              marginRight: '10px',
-                            }}></div>
+                          <button
+                            className='focus:bg-yellow-600 mr-4 text-lg bg-gray-300 px-2'
+                            onClick={() => setSize(size)}>
+                            {size}
+                          </button>
                         );
                       })}
                     </div>
                   </>
-                ))}
-
-              <h1>Selected Size:{size ? size : 'No size selected'}</h1>
-              <div className='flex justify-start'>
-                <div
-                  className='border-2 border-gray-300 p-1 mr-2  cursor-pointer'
-                  onClick={() => setSize('S')}>
-                  S
-                </div>
-                <div
-                  className='border-2 border-gray-300 p-1 mr-2  cursor-pointer'
-                  onClick={() => setSize('M')}>
-                  M
-                </div>
-                <div
-                  className='border-2 border-gray-300 p-1 mr-2  cursor-pointer'
-                  onClick={() => setSize('L')}>
-                  L
-                </div>
-                <div
-                  className='border-2 border-gray-300 p-1 mr-2  cursor-pointer'
-                  onClick={() => setSize('XL')}>
-                  XL
-                </div>
-                <div
-                  className='border-2 border-gray-300 p-1 mr-2  cursor-pointer'
-                  onClick={() => setSize('XXL')}>
-                  XXL
-                </div>
+                ) : (
+                  ''
+                )}
               </div>
+
               <div className='flex justify-around'>
                 <button
                   onClick={addToCartHandler}

@@ -2,12 +2,13 @@ import React from 'react';
 import Select from 'react-select';
 
 const colorsOption = [
-  { value: '#239B56', label: 'Green' },
-  { value: '#DA170E ', label: 'Red' },
-  { value: '#F6DC01 ', label: 'Yellow' },
-  { value: '#FDFEFE ', label: 'White' },
-  { value: '#8E44AD  ', label: 'Purple' },
-  { value: '#17202A   ', label: 'Black' },
+  { value: 'green', label: 'Green' },
+  { value: 'red ', label: 'Red' },
+  { value: 'yellow ', label: 'Yellow' },
+  { value: 'White ', label: 'White' },
+  { value: 'purple  ', label: 'Purple' },
+  { value: 'black   ', label: 'Black' },
+  { value: 'pink   ', label: 'Pink' },
 ];
 const ColorsMultiSelect = props => {
   const handleChange = value => {
@@ -22,7 +23,7 @@ const ColorsMultiSelect = props => {
 
   return (
     <div style={{ margin: '1rem 0' }}>
-      <label htmlFor='color'>Colors (select at least 2) </label>
+      <label htmlFor='color'>Colors (select at least 3) </label>
       <Select
         id='color'
         options={colorsOption}
