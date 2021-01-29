@@ -1,21 +1,22 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrderAction } from '../redux/actions/orderActions';
+import { ORDER_CREATE_RESET } from '../redux/actionTypes/orderActionTypes';
+import { USER_DETAILS_RESET } from '../redux/actionTypes/userSctionTypes';
 // import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 // import { USER_DETAILS_RESET } from '../constants/userConstants';
 
-const PlaceOrderScreenOld = ({ history }) => {
+const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   //This component contains the summary of our order
   const cart = useSelector(state => state.cart);
   //calculate price
 
-  console.log(cart.cartItems[0].image[0].url);
   //We want to add additonal property to the cart, in mongoose we will call virtual property because it does not persist in our database
   cart.itemsPrice = cart.cartItems.reduce((acc, item) => {
     return acc + item.price * item.qty;
@@ -25,13 +26,17 @@ const PlaceOrderScreenOld = ({ history }) => {
   cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 100;
 
   //Add Tax
-  cart.taxPrice = Number((0.15 * cart.itemsPrice).toFixed(2)).toFixed(2);
+  cart.taxPrice = 0.0;
 
   //Total cost. Add all shipping and tax
-  cart.totalPrice =
-    Number(cart.itemsPrice) +
-    Number(cart.shippingPrice) +
-    Number(cart.taxPrice);
+  cart.totalPrice = Number(cart.itemsPrice);
+
+  //================================================================
+  //Get the order details to pay from storage
+  //================================================================
+  const orderDetailsToPay = JSON.parse(
+    localStorage.getItem('orderPaymentDetails')
+  );
 
   const placeOrderHandler = () => {
     //All these values is coming from our cart
@@ -41,9 +46,8 @@ const PlaceOrderScreenOld = ({ history }) => {
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         itemsPrice: cart.itemsPrice,
-        shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
-        totalPrice: cart.totalPrice,
+        totalPrice: orderDetailsToPay.grandTotal,
       })
     );
   };
@@ -54,123 +58,254 @@ const PlaceOrderScreenOld = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
-      // dispatch({ type: USER_DETAILS_RESET });
-      // dispatch({ type: ORDER_CREATE_RESET });
+      dispatch({ type: USER_DETAILS_RESET });
+      dispatch({ type: ORDER_CREATE_RESET });
     }
     // eslint-disable-next-line
   }, [history, success]);
 
   return (
     <>
-      <>
-        {/* <CheckoutSteps step1 step2 step3 step4 /> */}
-        <Row>
-          <Col md={8}>
-            <ListGroup variant='flush'>
-              <ListGroup.Item>
-                <h2>Shipping</h2>
-                <p>
-                  <strong>Address:</strong>
-                  {cart.shippingAddress.address}, {cart.shippingAddress.city}{' '}
-                  {cart.shippingAddress.postalCode},{' '}
-                  {cart.shippingAddress.country}
-                </p>
-              </ListGroup.Item>
+      <div class='flex mt-16 h-screen flex-wrap  md:mb-0'>
+        <div class='w-full md:w-2/3 px-4 mb-4 md:mb-0'>
+          {/* Shipping address details */}
+          <div class='mb-8 '>
+            <ul>
+              <li class='mb-2 flex items-center'>
+                <svg
+                  class='inline-block w-6 h-6 mr-3 text-indigo-600'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'>
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
+                  />
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
+                  />
+                </svg>
+                <span>
+                  {cart?.shippingAddress.address}, {cart?.shippingAddress.city}
+                </span>
+              </li>
+              <li class='mb-2 flex items-center'>
+                <svg
+                  class='inline-block w-6 h-6 mr-3 text-indigo-600'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'>
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z'></path>
+                </svg>
+                {cart.shippingAddress?.phoneNumber}
+              </li>
+              <li class='mb-2 flex items-center'>
+                <svg
+                  class='inline-block w-6 h-6 mr-3 text-indigo-600'
+                  xmlns='http://www.w3.org/2000/svg'
+                  viewBox='0 0 20 20'
+                  fill='currentColor'>
+                  <path d='M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z' />
+                  <path d='M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z' />
+                </svg>
+                Shipping Type: {orderDetailsToPay.shippingType}
+              </li>
+              <li class='mb-2 flex items-center'>
+                <svg
+                  class='inline-block w-6 h-6 mr-3 text-indigo-600'
+                  xmlns='http://www.w3.org/2000/svg'
+                  viewBox='0 0 20 20'
+                  fill='currentColor'>
+                  <path d='M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z' />
+                </svg>
+                <span> Region: {cart.shippingAddress.region}</span>
+              </li>
+              <li class='mb-2 flex items-center'>
+                <svg
+                  class='inline-block w-6 h-6 mr-3 text-indigo-600'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'>
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'></path>
+                </svg>
+                <span> {cart.shippingAddress?.email}</span>
+              </li>
+            </ul>
+          </div>
+          {/* Table */}
 
-              <ListGroup.Item>
-                <h2>Payment Method</h2>
-                <strong>Method: </strong>
-                {cart.paymentMethod}
-              </ListGroup.Item>
+          <div class='flex flex-col'>
+            <div class='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+              <div class='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
+                <div class='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
+                  <table class='min-w-full divide-y divide-gray-200'>
+                    <thead class='bg-gray-50'>
+                      <tr>
+                        <th
+                          scope='col'
+                          class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                          Name
+                        </th>
+                        <th
+                          scope='col'
+                          class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                          Title
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class='bg-white divide-y divide-gray-200'>
+                      {cart.cartItems.length === 0 ? (
+                        <h1>Your Cart is empty</h1>
+                      ) : (
+                        <>
+                          {cart.cartItems.map((item, index) => (
+                            <tr>
+                              <td class='px-6 py-3  whitespace-nowrap'>
+                                <div class='flex items-center'>
+                                  <div class='flex-shrink-0 h-10 w-10'>
+                                    <img
+                                      class='h-10 w-10 rounded-full'
+                                      src={item.image[0].url}
+                                      alt=''
+                                    />
+                                  </div>
+                                  <div class='ml-4'>
+                                    <div class='text-sm font-medium text-gray-900'>
+                                      <Link to={`/product/${item.product}`}>
+                                        {item.name}
+                                      </Link>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class='px-6 py-3 whitespace-nowrap text-sm text-gray-500'>
+                                <div class='text-sm text-gray-500'>
+                                  {item.qty} x GHS {item.price} = GHS
+                                  {item.qty * item.price}
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='w-full md:w-1/3 px-4 mb-4 md:mb-0'>
+          <div>
+            <p class=' text-gray-400 text-3xl  cursor-pointer '>
+              Order Summary
+            </p>
+          </div>
+          {/* Second table */}
 
-              <ListGroup.Item>
-                <h2>Order Items</h2>
-                {cart.cartItems.length === 0 ? (
-                  <Message>Your cart is empty</Message>
-                ) : (
-                  <ListGroup variant='flush'>
-                    {cart.cartItems.map((item, index) => (
-                      <ListGroup.Item key={index}>
-                        <Row>
-                          <Col md={1}>
-                            <Image
-                              src={item.image[0].url}
-                              alt={item.name}
-                              fluid
-                              rounded
-                            />
-                          </Col>
-                          <Col>
-                            <Link to={`/product/${item.product}`}>
-                              {item.name}
-                            </Link>
-                          </Col>
-                          <Col md={4}>
-                            {item.qty} x GHS {item.price} = GHS
-                            {item.qty * item.price}
-                          </Col>
-                        </Row>
-                      </ListGroup.Item>
-                    ))}
-                  </ListGroup>
-                )}
-              </ListGroup.Item>
-            </ListGroup>
-          </Col>
-          <Col md={4}>
-            <Card>
-              <ListGroup variant='flush'>
-                <ListGroup.Item>
-                  <h2>Order Summary</h2>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Items</Col>
-                    <Col>GHS{cart.itemsPrice}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Shipping</Col>
-                    <Col>GHS{cart.shippingPrice}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Tax</Col>
-                    <Col>GHS {cart.taxPrice}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Total</Col>
-                    <Col>GHS{cart.totalPrice}</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  {error && <Message variant='danger'>{error}</Message>}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Button
-                    type='button'
-                    className='btn-block'
-                    disabled={cart.cartItems === 0}
-                    onClick={placeOrderHandler}>
-                    Place Order
-                  </Button>
-                </ListGroup.Item>
-              </ListGroup>
-            </Card>
-          </Col>
-        </Row>
-      </>
+          <div class='flex flex-col'>
+            <div class='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+              <div class='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
+                <div class='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
+                  <table class='min-w-full divide-y divide-gray-200'>
+                    <thead class='bg-gray-50'>
+                      <tr>
+                        <th
+                          scope='col'
+                          class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'></th>
+                        <th
+                          scope='col'
+                          class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'></th>
+                      </tr>
+                    </thead>
+                    <tbody class='bg-white divide-y divide-gray-200'>
+                      <tr>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
+                          Shipping Type
+                        </td>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
+                          {orderDetailsToPay.shippingType}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
+                          Tax
+                        </td>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
+                          GHS 0.00
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
+                          Cost of Items
+                        </td>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
+                          GHS {orderDetailsToPay.totalCostOfItems}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
+                          Shipping Cost
+                        </td>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
+                          GHS{' '}
+                          {orderDetailsToPay.shippingCostBaseOnShippingMethod}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
+                          Grand Total
+                        </td>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
+                          GHS {orderDetailsToPay.grandTotal}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  {/* Errors */}
 
-      <div className='flex'>
-        <div>1</div>
-        <div>2</div>
+                  <div>
+                    {error && <Message variant='danger'>{error}</Message>}
+                  </div>
+                  <div className='mt-4'>
+                    {cart.cartItems.length === 0 ? (
+                      <button
+                        disabled
+                        className='rounded cursor-not-allowed py-2 inline-block w-full bg-blue-400 '>
+                        Your cart is empty
+                      </button>
+                    ) : (
+                      <button
+                        onClick={placeOrderHandler}
+                        className='rounded text-gray-200 py-2 text-lg inline-block w-full bg-blue-900 '>
+                        placeorder
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
 };
 
-export default PlaceOrderScreenOld;
+export default PlaceOrderScreen;

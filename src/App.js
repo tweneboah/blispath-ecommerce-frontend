@@ -56,7 +56,7 @@ const App = () => {
           <Route exact path='/payment-success' component={PaymentSuccess} />
           <Route exact path='/order2' component={PlaceOrderScreenOld} />
           {/* Categories */}
-          <Route exact path='/fashions' component={FashionCategories} />
+          <Route exact path='/ladies' component={FashionCategories} />
           <Route exact path='/gents' component={GentsCategories} />
           <Route
             exact

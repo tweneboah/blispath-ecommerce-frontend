@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -41,7 +40,7 @@ const UserListScreen = ({ history }) => {
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Table striped bordered hover responsive className='table-sm'>
+        <table striped bordered hover responsive className='table-sm'>
           <thead>
             <tr>
               <th>ID</th>
@@ -67,11 +66,11 @@ const UserListScreen = ({ history }) => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                    <Button variant='light' className='btn-sm'>
+                  <Link to={`/admin/user/${user._id}/edit`}>
+                    <button variant='light' className='btn-sm'>
                       <i className='fas fa-edit'></i>
-                    </Button>
-                  </LinkContainer>
+                    </button>
+                  </Link>
                   {/* <Button
                     variant='danger'
                     className='btn-sm'
@@ -82,7 +81,7 @@ const UserListScreen = ({ history }) => {
               </tr>
             ))}
           </tbody>
-        </Table>
+        </table>
       )}
     </>
   );

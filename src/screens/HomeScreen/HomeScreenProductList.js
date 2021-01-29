@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProductsAction } from '../../redux/actions/productActions';
 import ErrorMessage from '../../components/ErrorMessage';
 import Loading from '../../components/Loading';
-import '../../styles/HomeScreenProductList.css';
 
 const HomeScreenProductList = () => {
   const dispatch = useDispatch();
@@ -12,7 +11,7 @@ const HomeScreenProductList = () => {
   const [productSearchTerm, setproductSearchTerm] = useState('');
   useEffect(() => {
     dispatch(fetchAllProductsAction(productSearchTerm));
-  }, [dispatch]);
+  }, [dispatch, productSearchTerm]);
 
   const productList = useSelector(state => state.productList);
   //These are the state that are possible to be available
@@ -21,10 +20,27 @@ const HomeScreenProductList = () => {
   return (
     <div className='home_product_list_grid_section'>
       <div className='home_product_list_title_div w-container'>
-        <h1 className='product_heading text-gray-600 font-semi-bold capitalize font-mono'>
+        <h1 className='product_heading text-3xl mb-2 text-gray-600 font-semi-bold capitalize font-mono'>
           Latest Products
         </h1>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
+        <div className='text-center mb-6'>
+          <div>
+            <input
+              value={productSearchTerm}
+              onChange={e => setproductSearchTerm(e.target.value)}
+              type='text'
+              name='email'
+              id='email'
+              class='shadow-sm p-3 border-2 focus:ring-indigo-500 focus:border-yellow-500 block w-full sm:text-sm border-gray-300 rounded-md text-center'
+              placeholder='Search For Products'
+            />
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for='email' class='sr-only'>
+          Email
+        </label>
       </div>
       <div className='w-layout-grid home_product_list_grid'>
         {loading ? (

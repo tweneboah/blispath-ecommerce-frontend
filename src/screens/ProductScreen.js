@@ -12,7 +12,6 @@ import Message from '../components/Message';
 const ProductScreen = ({ match, history }) => {
   const [color, setColor] = useState('');
   const [size, setSize] = useState('');
-  const [greenColor, setGreenColor] = useState('');
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
 
@@ -47,9 +46,9 @@ const ProductScreen = ({ match, history }) => {
   return (
     <>
       <Link to='/'>
-        <button class='bg-red-600 mt-4 px-3 py-2 text-xl rounded-l-full text-gray-100 hover:bg-red-300'>
+        <button class='bg-red-600 mt-2 mb-2 px-3 py-2 ml-3 text-xl rounded-l-full text-gray-100 hover:bg-red-300'>
           {' '}
-          Go Backss
+          Go Back
         </button>
       </Link>
       {loading ? (
@@ -124,8 +123,8 @@ const ProductScreen = ({ match, history }) => {
                           onClick={() => setColor(color)}
                           style={{
                             backgroundColor: `${color}`,
-                            height: '20px',
-                            width: '20px',
+                            height: '22px',
+                            width: '23px',
                             marginRight: '10px',
                           }}></button>
                       );
@@ -136,10 +135,10 @@ const ProductScreen = ({ match, history }) => {
                 ''
               )}
 
-              <h1>Selected Size:{size ? size : 'No size selected'}</h1>
-              <div className='flex justify-start'>
+              <div className='flex justify-start flex-col'>
                 {product?.category === 'Fashion' || 'Gents' ? (
                   <>
+                    <h1>Selected Size:{size ? size : 'No size selected'}</h1>
                     <div className='flex justify-start m-2 '>
                       {product.sizes?.map(size => {
                         return (
@@ -161,7 +160,7 @@ const ProductScreen = ({ match, history }) => {
                 <button
                   onClick={addToCartHandler}
                   disabled={product?.countInStock === 0}
-                  class={`inline-block w-60 py-3 mb-5 rounded-lg px-4 leading-none text-white  ${
+                  class={`inline-block w-60 py-3 mt-3 rounded-lg px-4 leading-none text-white  ${
                     product?.countInStock === 0
                       ? 'bg-red-400 cursor-not-allowed'
                       : 'bg-blue-900'

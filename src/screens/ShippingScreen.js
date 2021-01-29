@@ -20,22 +20,13 @@ const ShippingScreen = ({ history }) => {
           city: shippingAddress?.city,
           postalCode: shippingAddress?.postalCode,
           country: shippingAddress?.country,
-          region: shippingAddress?.region,
+          region: shippingAddress?.region ? shippingAddress?.region : 'Other',
           email: shippingAddress?.email,
           phoneNumber: shippingAddress?.phoneNumber,
-          shippingType: 'Free',
         }}
         onSubmit={values => {
-          console.log(values);
-          if (
-            !shippingAddress.region ||
-            shippingAddress.region === 'No region selected'
-          ) {
-            alert('Please enter your region');
-          } else {
-            dispatch(saveShippingAddressAction(values));
-            history.push('/placeorder');
-          }
+          dispatch(saveShippingAddressAction(values));
+          history.push('/placeorder');
         }}>
         {props => {
           return (
@@ -131,7 +122,6 @@ const ShippingScreen = ({ history }) => {
                           onChange={props.handleChange('region')}
                           name='category'
                           className='mt-1 block border w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'>
-                          <option value='Ashanti'>No region selected</option>
                           <option value='Ashanti'>Ashanti</option>
                           <option value='Western'>Western</option>
                           <option value='Northern'>Northern</option>
@@ -139,7 +129,9 @@ const ShippingScreen = ({ history }) => {
                           <option value='Accra'>Accra</option>
                           <option value='Brong Ahafo'>Brong Ahafo</option>
                           <option value='Volta'>Volta</option>
-                          <option value='Other'>Other</option>
+                          <option selected value='Other'>
+                            Other
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -177,32 +169,7 @@ const ShippingScreen = ({ history }) => {
                         />
                       </div>
                     </div>
-                    <div>
-                      <label className='block text-sm font-medium text-gray-700'>
-                        Shipping Type
-                      </label>
-                      <div className='mt-1'>
-                        <select
-                          onBlur={props.handleBlur('shippingType')}
-                          onChange={props.handleChange('shippingType')}
-                          name='shippingType'
-                          className='mt-1 block border w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'>
-                          <option selected value='Free'>
-                            Free
-                          </option>
-                          <option value='Exress'>Exress</option>
-                        </select>
-                        <div className='text-red-500'>
-                          NOTE: For free shipping it can take about 30 days but
-                          if you need an express (10 days by flight ) your
-                          shipping is not part of the total cost of the products
-                          but instead you will pay during pick up For more info{' '}
-                          <Link to='/contact'>
-                            <span className='text-blue-600'>contact us</span>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
+
                     <div className='flex items-center justify-between'>
                       <div className='text-sm'></div>
                     </div>

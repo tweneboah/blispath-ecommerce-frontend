@@ -28,6 +28,7 @@ export const addToCart = (id, qty, color, size) => {
         qty,
         color,
         size,
+        shippingCost: data.shippingCost,
       },
       //After dispatching this data will be in our store and will take that and store into localstorage
     });

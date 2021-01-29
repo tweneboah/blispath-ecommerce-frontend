@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../styles/HomeCategory.css';
+
 const HomeScreenCategory = () => {
   return (
     <div class='w-layout-grid homecategorygrid'>

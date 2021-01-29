@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-// import CategoriesWithLogo from '../../components/Categories/CategoriesWithLogo';
-import Customers from '../../components/Customers';
-import ErrorMessage from '../../components/ErrorMessage';
-import FAQ from '../../components/FAQ';
-import HomeBanner from '../../components/HomeBanner';
-import HomePageSections from '../../components/HomePageSections';
 
-import Loading from '../../components/Loading';
-import Ratings from '../../components/Ratings';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { fetchAllProductsAction } from '../../redux/actions/productActions';
 
 import Loader from '../../components/Loader';

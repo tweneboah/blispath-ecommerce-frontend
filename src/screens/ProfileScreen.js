@@ -41,7 +41,7 @@ const ProfileScreen = ({ location, history }) => {
     }, 0);
 
   return (
-    <div className='h-full'>
+    <div className='min-screen'>
       {/* Profile details container */}
       <div>{profileError && <ErrorMessage>{profileError}</ErrorMessage>}</div>
 

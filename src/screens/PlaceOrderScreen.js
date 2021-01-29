@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrderAction } from '../redux/actions/orderActions';
-import { Formik } from 'formik';
+import { ORDER_CREATE_RESET } from '../redux/actionTypes/orderActionTypes';
+import { USER_DETAILS_RESET } from '../redux/actionTypes/userSctionTypes';
 // import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 // import { USER_DETAILS_RESET } from '../constants/userConstants';
 
@@ -29,7 +30,14 @@ const PlaceOrderScreen = ({ history }) => {
 
   //Total cost. Add all shipping and tax
   cart.totalPrice = Number(cart.itemsPrice);
-  console.log(cart.cartItems.length === 0);
+
+  //================================================================
+  //Get the order details to pay from storage
+  //================================================================
+  const orderDetailsToPay = JSON.parse(
+    localStorage.getItem('orderPaymentDetails')
+  );
+
   const placeOrderHandler = () => {
     //All these values is coming from our cart
     dispatch(
@@ -39,7 +47,7 @@ const PlaceOrderScreen = ({ history }) => {
         paymentMethod: cart.paymentMethod,
         itemsPrice: cart.itemsPrice,
         taxPrice: cart.taxPrice,
-        totalPrice: cart.totalPrice,
+        totalPrice: orderDetailsToPay.grandTotal,
       })
     );
   };
@@ -50,8 +58,8 @@ const PlaceOrderScreen = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
-      // dispatch({ type: USER_DETAILS_RESET });
-      // dispatch({ type: ORDER_CREATE_RESET });
+      dispatch({ type: USER_DETAILS_RESET });
+      dispatch({ type: ORDER_CREATE_RESET });
     }
     // eslint-disable-next-line
   }, [history, success]);
@@ -111,7 +119,7 @@ const PlaceOrderScreen = ({ history }) => {
                   <path d='M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z' />
                   <path d='M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z' />
                 </svg>
-                Shipping Type: {cart.shippingAddress?.shippingType}
+                Shipping Type: {orderDetailsToPay.shippingType}
               </li>
               <li class='mb-2 flex items-center'>
                 <svg
@@ -205,7 +213,9 @@ const PlaceOrderScreen = ({ history }) => {
         </div>
         <div class='w-full md:w-1/3 px-4 mb-4 md:mb-0'>
           <div>
-            <p>ORDER Summary</p>
+            <p class=' text-gray-400 text-3xl  cursor-pointer '>
+              Order Summary
+            </p>
           </div>
           {/* Second table */}
 
@@ -227,18 +237,10 @@ const PlaceOrderScreen = ({ history }) => {
                     <tbody class='bg-white divide-y divide-gray-200'>
                       <tr>
                         <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
-                          Items
+                          Shipping Type
                         </td>
                         <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
-                          GHS {cart?.itemsPrice}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
-                          Shipping
-                        </td>
-                        <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
-                          {cart?.shippingAddress?.shippingType}
+                          {orderDetailsToPay.shippingType}
                         </td>
                       </tr>
                       <tr>
@@ -251,10 +253,27 @@ const PlaceOrderScreen = ({ history }) => {
                       </tr>
                       <tr>
                         <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
-                          Total
+                          Cost of Items
                         </td>
                         <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
-                          GHS {cart?.totalPrice}
+                          GHS {orderDetailsToPay.totalCostOfItems}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
+                          Shipping Cost
+                        </td>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
+                          GHS{' '}
+                          {orderDetailsToPay.shippingCostBaseOnShippingMethod}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
+                          Grand Total
+                        </td>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
+                          GHS {orderDetailsToPay.grandTotal}
                         </td>
                       </tr>
                     </tbody>
@@ -274,7 +293,7 @@ const PlaceOrderScreen = ({ history }) => {
                     ) : (
                       <button
                         onClick={placeOrderHandler}
-                        className='rounded text-gray-200 py-2 inline-block w-full bg-yellow-900 '>
+                        className='rounded text-gray-200 py-2 text-lg inline-block w-full bg-blue-900 '>
                         placeorder
                       </button>
                     )}

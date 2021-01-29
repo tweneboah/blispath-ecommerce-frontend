@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrderDetailsActon } from '../redux/actions/orderActions';
 import Message from '../components/Message';
@@ -23,13 +22,20 @@ const OrderScreen = ({ match, history }) => {
     }
   }, [order, match]);
 
+  //================================================================
+  //Get the order details to pay from storage
+  //================================================================
+  const orderDetailsToPay = JSON.parse(
+    localStorage.getItem('orderPaymentDetails')
+  );
+
   //Send To Pay
 
   const sendToPay = () => {
     history.push('/pay', {
       orderId: order._id,
       userEmail: order.user.email,
-      totalAmount: order.totalPrice.toString(),
+      totalAmount: orderDetailsToPay.grandTotal.toString(),
     });
   };
   return loading ? (
@@ -94,7 +100,7 @@ const OrderScreen = ({ match, history }) => {
                   <path d='M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z' />
                   <path d='M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z' />
                 </svg>
-                Shipping Type: {cart.shippingAddress?.shippingType}
+                Shipping Type: {orderDetailsToPay.shippingType}
               </li>
               <li class='mb-2 flex items-center'>
                 <svg
@@ -284,18 +290,10 @@ const OrderScreen = ({ match, history }) => {
                     <tbody class='bg-white divide-y divide-gray-200'>
                       <tr>
                         <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
-                          Items
+                          Shipping Type
                         </td>
                         <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
-                          GHS {order?.totalPrice}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
-                          Shipping
-                        </td>
-                        <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
-                          {order?.shippingAddress?.shippingType}
+                          {orderDetailsToPay.shippingType}
                         </td>
                       </tr>
                       <tr>
@@ -308,10 +306,27 @@ const OrderScreen = ({ match, history }) => {
                       </tr>
                       <tr>
                         <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
-                          Total
+                          Cost of Items
                         </td>
                         <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
-                          GHS {order?.totalPrice}
+                          GHS {orderDetailsToPay.totalCostOfItems}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
+                          Shipping Cost
+                        </td>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
+                          GHS{' '}
+                          {orderDetailsToPay.shippingCostBaseOnShippingMethod}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900'>
+                          Grand Total
+                        </td>
+                        <td class='px-6 py-2 whitespace-nowrap text-sm text-gray-500'>
+                          GHS {orderDetailsToPay.grandTotal}
                         </td>
                       </tr>
                     </tbody>
@@ -323,13 +338,13 @@ const OrderScreen = ({ match, history }) => {
                   </div>
                   <div className='mt-4'>
                     {!order.isPaid ? (
-                      <Button
+                      <button
                         onClick={sendToPay}
                         type='button'
                         className='btn-block'
                         disabled={order.cartItems === 0}>
                         Continue to Payment
-                      </Button>
+                      </button>
                     ) : (
                       <button
                         disabled

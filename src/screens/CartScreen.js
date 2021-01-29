@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import queryString from 'query-string';
@@ -9,16 +9,19 @@ import Message from '../components/Message';
 //To get value from query string we will use location.search
 
 const CartScreen = ({ match, location, history }) => {
+  const [shippingType, setshippingType] = useState('free');
+  //===============================
   const productId = match.params?.id;
   // const qty = location.search ? Number(location.search.split('=')[1]) : 1;
+  //===============================
+
   const dispatch = useDispatch();
 
   const parsedQueryStrings = queryString.parse(location.search);
   const qty = parseInt(parsedQueryStrings.qty);
   const color = parsedQueryStrings.color;
   const size = parsedQueryStrings.size;
-  console.log(typeof qty);
-  console.log(color);
+
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty, color, size));
@@ -28,19 +31,68 @@ const CartScreen = ({ match, location, history }) => {
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart;
 
-  //Remove cart item
+  //================================================================
+  //Calc the shipping cost
+  //================================================================
+  const shippingCostOfProducts = cartItems.reduce(
+    (accumulator, currentValue) => {
+      console.log(currentValue);
+      return accumulator + currentValue.shippingCost;
+    },
+    0
+  );
 
+  console.log(shippingCostOfProducts);
+  //================================================================
+  //Total Shipping cost base on shipping method
+  //================================================================
+
+  const shippingCostBaseOnShippingMethod =
+    shippingType === 'free' ? 0.0 : Number(shippingCostOfProducts);
+
+  //===============================
+  //Total Cost of items
+  //===============================
+  const totalCostOfItems = cartItems
+    .reduce((acc, curr) => acc + curr?.qty * curr?.price, 0)
+    .toFixed(2);
+
+  //================================================================
+  //Grand Total
+  //================================================================
+  const grandTotal =
+    shippingType === 'free'
+      ? Number(totalCostOfItems)
+      : Number(totalCostOfItems) + Number(shippingCostBaseOnShippingMethod);
+
+  //Remove cart item
   const removeFromCartHandler = id => {
     dispatch(removeFromCart(id));
   };
 
+  //===============================
   //checkout
+  //===============================
   const checkoutHandler = () => {
     //redirect to login if it has a queryString of shipping
     history.push('/login?redirect=shipping'); //This means if not login it will take you to login otherwise redirect to shipping
   };
+
+  //Save the payment details to storage
+
+  localStorage.setItem(
+    'orderPaymentDetails',
+    JSON.stringify({
+      shippingType: shippingType,
+      grandTotal: grandTotal,
+      shippingCostOfProducts: shippingCostOfProducts,
+      totalCostOfItems: totalCostOfItems,
+      shippingCostBaseOnShippingMethod: shippingCostBaseOnShippingMethod,
+    })
+  );
+
   return (
-    <div className='h-screen'>
+    <div className='min-screen'>
       <div className='mt-5 lg:flex   text-center bg-gray-200 py-2 md:block'>
         <div className='flex-2 ml-3'>
           <Link to='/'>
@@ -49,7 +101,7 @@ const CartScreen = ({ match, location, history }) => {
             </button>
           </Link>
         </div>
-        <div className='flex-1 text-lg'>Shopping Cart</div>
+        <div className='flex-1 text-lg font-semibold'>Shopping Cart</div>
       </div>
       {cartItems?.length === 0 ? (
         <Message>
@@ -63,8 +115,10 @@ const CartScreen = ({ match, location, history }) => {
                 <div class='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
                   <div class='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
                     <table class='min-w-full divide-y divide-gray-200 mt-4 mb-4'>
-                      <tbody class='bg-white divide-y divide-gray-200 '>
-                        <div className='p-2'>pre orders list</div>
+                      <tbody class='bg-gray-200 divide-y divide-gray-200 '>
+                        <div className='p-2 font-semibold mb-2'>
+                          pre orders list
+                        </div>
                         {cartItems?.map(item => (
                           <tr>
                             <td class='px-6 py-4 whitespace-nowrap'>
@@ -128,27 +182,47 @@ const CartScreen = ({ match, location, history }) => {
               </div>
             </div>
           </div>
-          <div className='bg-gray-100 border md:w-full mt-6 mr-4 rounded-md  ml-4 text-center flex justify-center items-center flex-col'>
+          <div className='bg-gray-100 border md:w-full mt-6 mr-4 rounded-md h-screen ml-4 text-center flex justify-center items-center flex-col'>
             <div className=''>
-              <h2 className='underline'>
-                Subtoal ({' '}
+              <h2 className='capitalize text-lg font-black'>
+                Total Items ({' '}
                 {cartItems?.reduce((acc, curr) => {
                   return acc + curr?.qty;
                 }, 0)}
                 )
               </h2>
-              {/* PRICE */}
-              <h2 className='font-mono mt-4 text-green-600'>
-                {' '}
-                GHS{' '}
-                {cartItems
-                  .reduce((acc, curr) => acc + curr?.qty * curr?.price, 0)
-                  .toFixed(2)}
+              <h2 className='capitalize mt-2 text-lg font-black'>
+                Shipping Cost GHS {shippingCostBaseOnShippingMethod}
               </h2>
+
+              <h2 className='capitalize text-lg mt-2 font-black'>
+                Cost of Items GHS {totalCostOfItems}
+              </h2>
+              {/* PRICE */}
+              <h2 className='font-mono font-black mt-2  text-lg text-red-600'>
+                Grand Total GHS {grandTotal}
+              </h2>
+
+              <div className='mt-2'>
+                <label
+                  for='location'
+                  class='block text-sm font-medium text-gray-700'>
+                  Select shipping Type
+                </label>
+                <select
+                  onChange={e => {
+                    const selectedShippingType = e.target.value;
+                    setshippingType(selectedShippingType);
+                  }}
+                  class='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'>
+                  <option value='free'>Free</option>
+                  <option value='express'>Express</option>
+                </select>
+              </div>
             </div>
             <button
               disabled={cartItems?.length === 0}
-              className=' p-2 border-yellow-400 shadow mt-4 rounded-full bg-green-900 text-white px-3'
+              className=' px-3 border-yellow-400 shadow mt-4 rounded-full text-lg bg-blue-900 text-white py-2'
               onClick={checkoutHandler}>
               Proceed to checkout
             </button>

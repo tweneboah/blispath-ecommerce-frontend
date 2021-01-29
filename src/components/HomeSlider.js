@@ -1,5 +1,3 @@
-import '../styles/SlideShow.css';
-
 const HomeSlider = () => {
   return (
     <div

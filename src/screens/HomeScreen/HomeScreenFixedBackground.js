@@ -1,9 +1,9 @@
 import React from 'react';
-import '../../styles/HomeScreenFixedBackground.css';
+
 const HomeScreenFixedBackground = () => {
   return (
     <>
-      <div class='homescreen_fixed_bg '></div>
+      <div class='homescreen_fixed_bg bg-gray-900'></div>
       <div class='w-layout-grid home_screen_big_grid'>
         <div class='homescreen_big_img_column'></div>
         <div class='homescreen_big_image_text'>

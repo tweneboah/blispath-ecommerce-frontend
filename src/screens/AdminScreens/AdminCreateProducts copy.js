@@ -15,6 +15,7 @@ const formSchema = yup.object({
   countInStock: yup.string().required(),
   numReviews: yup.string().required(),
   description: yup.string().required(),
+  shippingCost: yup.string().required(),
 });
 
 const AdminCreateProducts = ({ history, match }) => {
@@ -58,15 +59,13 @@ const AdminCreateProducts = ({ history, match }) => {
           countInStock: '',
           numReviews: '',
           description: '',
+          shippingCost: '',
           image: [],
-          colors: colors.map(t => t.value),
+          colors: colors.map(color => color.value),
         }}
         onSubmit={values => {
           values.colors = colors;
-          console.log(values);
-
           dispatch(createProductAction(values));
-          // console.log(values);
         }}
         validationSchema={formSchema}>
         {props => {

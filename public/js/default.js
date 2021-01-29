@@ -624,7 +624,7 @@
         if (((A.style[S] = d['ease-in-back'][0]), !A.style[S]))
           for (var D in f) d[D][0] = f[D];
       }
-      var L = (e.frame = (function () {
+      var P = (e.frame = (function () {
           var t =
             p.requestAnimationFrame ||
             p.webkitRequestAnimationFrame ||
@@ -637,7 +637,7 @@
                 p.setTimeout(t, 16);
               };
         })()),
-        P = (e.now = (function () {
+        L = (e.now = (function () {
           var t = p.performance,
             e = t && (t.now || t.webkitNow || t.msNow || t.mozNow);
           return e && W.bind
@@ -725,7 +725,7 @@
                 var p = this,
                   v = !1,
                   m = {};
-                L(function () {
+                P(function () {
                   h.call(p, t, function (t) {
                     t.active && ((v = !0), (m[t.name] = t.nextStyle));
                   }),
@@ -1037,13 +1037,13 @@
               this.el.offsetHeight;
             });
         }),
-        F = l(N, function (t, e) {
+        j = l(N, function (t, e) {
           t.init = function () {
             e.init.apply(this, arguments),
               this.original || (this.original = this.convert(this.get(), b));
           };
         }),
-        j = l(N, function (t, e) {
+        F = l(N, function (t, e) {
           (t.init = function () {
             e.init.apply(this, arguments), (this.animate = this.fallback);
           }),
@@ -1136,7 +1136,7 @@
               e,
               i,
               r = u.length;
-            if (r) for (L(n), e = P(), t = r; t--; ) (i = u[t]) && i.render(e);
+            if (r) for (P(n), e = L(), t = r; t--; ) (i = u[t]) && i.render(e);
           }
           var i = { ease: d.ease[1], from: 0, to: 1 };
           (e.init = function (t) {
@@ -1158,16 +1158,16 @@
                 ? ((this.begin = n), (this.change = r - n))
                 : this.format(r, n),
               (this.value = this.begin + this.unit),
-              (this.start = P()),
+              (this.start = L()),
               !1 !== t.autoplay && this.play();
           }),
             (e.play = function () {
               var t;
               this.active ||
-                (this.start || (this.start = P()),
+                (this.start || (this.start = L()),
                 (this.active = !0),
                 (t = this),
-                1 === u.push(t) && L(n));
+                1 === u.push(t) && P(n));
             }),
             (e.stop = function () {
               var e, n, i;
@@ -1320,14 +1320,14 @@
         X = t.css,
         Z = { transform: W.transform && W.transform.css },
         V = {
-          color: [F, b],
-          background: [F, b, 'background-color'],
-          'outline-color': [F, b],
-          'border-color': [F, b],
-          'border-top-color': [F, b],
-          'border-right-color': [F, b],
-          'border-bottom-color': [F, b],
-          'border-left-color': [F, b],
+          color: [j, b],
+          background: [j, b, 'background-color'],
+          'outline-color': [j, b],
+          'border-color': [j, b],
+          'border-top-color': [j, b],
+          'border-right-color': [j, b],
+          'border-bottom-color': [j, b],
+          'border-left-color': [j, b],
           'border-width': [N, y],
           'border-top-width': [N, y],
           'border-right-width': [N, y],
@@ -1361,8 +1361,8 @@
           'min-height': [N, x],
           'max-height': [N, x],
           'line-height': [N, _],
-          'scroll-top': [j, w, 'scrollTop'],
-          'scroll-left': [j, w, 'scrollLeft'],
+          'scroll-top': [F, w, 'scrollTop'],
+          'scroll-left': [F, w, 'scrollLeft'],
         },
         Y = {};
       W.transform &&
@@ -1993,20 +1993,14 @@
               })(c, n);
           }
         }
-        function f(t) {
-          var e = n.WF_CLICK_SCROLL;
-          t.target.matches ? r.off(e) : r.on(e, l, d);
-        }
         return {
           ready: function () {
-            var i = n.WF_CHANGE,
-              o = n.WF_CLICK_EMPTY,
-              s = n.WF_CLICK_SCROLL;
-            e = a.href.split('#')[0];
-            var u = window.matchMedia('(prefers-reduced-motion: reduce)');
-            u.matches || r.on(s, l, d),
-              t(u).on(i, f),
-              r.on(o, c, function (t) {
+            n.WF_CHANGE;
+            var t = n.WF_CLICK_EMPTY,
+              i = n.WF_CLICK_SCROLL;
+            (e = a.href.split('#')[0]),
+              r.on(i, l, d),
+              r.on(t, c, function (t) {
                 t.preventDefault();
               });
           },
@@ -2498,7 +2492,7 @@
           i.resize.off(O);
         }
         function O() {
-          a.each(P);
+          a.each(L);
         }
         function R(n, i) {
           var r = t(i),
@@ -2523,7 +2517,7 @@
               return function (n) {
                 var i = t(n.target);
                 (u && i.closest('.w-editor-bem-EditorOverlay').length) ||
-                  L(e, i);
+                  P(e, i);
               };
             })(a));
           var c = r.find('.w-nav-brand');
@@ -2552,7 +2546,7 @@
                       i = i || {};
                       var r = d.width();
                       C(t),
-                        !0 === i.open && F(t, !0),
+                        !0 === i.open && j(t, !0),
                         !1 === i.open && H(t, !0),
                         t.open &&
                           e.defer(function () {
@@ -2649,7 +2643,7 @@
                     };
                   })(a)
                 )),
-            P(n, i);
+            L(n, i);
         }
         function A(e, n) {
           var i = t.data(n, m);
@@ -2679,11 +2673,11 @@
           }
         }
         function W(t) {
-          t.open && (H(t, !0), F(t, !0));
+          t.open && (H(t, !0), j(t, !0));
         }
         function S(t) {
           return h(function () {
-            t.open ? H(t) : F(t);
+            t.open ? H(t) : j(t);
           });
         }
         function D(e) {
@@ -2707,13 +2701,13 @@
           (c.destroy = function () {
             (_ = t()), E(), a && a.length && a.each(A);
           });
-        var L = h(function (t, e) {
+        var P = h(function (t, e) {
           if (t.open) {
             var n = e.closest('.w-nav-menu');
             t.menu.is(n) || H(t);
           }
         });
-        function P(e, n) {
+        function L(e, n) {
           var i = t.data(n, m),
             r = (i.collapsed = 'none' !== i.button.css('display'));
           if ((!i.open || r || s || H(i, !0), i.container.length)) {
@@ -2726,7 +2720,7 @@
             })(i);
             i.links.each(o), i.dropdowns.each(o);
           }
-          i.open && j(i);
+          i.open && F(i);
         }
         var z = 'max-width';
         function M(t, e) {
@@ -2735,7 +2729,7 @@
         function N(t, e) {
           e.removeAttribute('data-nav-menu-open');
         }
-        function F(t, e) {
+        function j(t, e) {
           if (!t.open) {
             (t.open = !0),
               t.menu.each(M),
@@ -2746,13 +2740,13 @@
               t.button.addClass(g);
             var n = t.config;
             ('none' !== n.animation && l.support.transform) || (e = !0);
-            var r = j(t),
+            var r = F(t),
               o = t.menu.outerHeight(!0),
               a = t.menu.outerWidth(!0),
               u = t.el.height(),
               c = t.el[0];
             if (
-              (P(0, c),
+              (L(0, c),
               k.intro(0, c),
               i.redraw.up(),
               s || f.on('click' + m, t.outside),
@@ -2782,7 +2776,7 @@
             t.button.attr('aria-expanded', 'true');
           }
         }
-        function j(t) {
+        function F(t) {
           var e = t.config,
             i = e.docHeight ? f.height() : n.height();
           return (
@@ -3042,10 +3036,10 @@
             if (s && 'setting' === r.type) {
               if ('prev' === a.select) return R(n)();
               if ('next' === a.select) return A(n)();
-              if ((k(n), L(n), null == a.select)) return;
+              if ((k(n), P(n), null == a.select)) return;
               !(function (n, i) {
                 var r = null;
-                i === n.slides.length && (w(), L(n)),
+                i === n.slides.length && (w(), P(n)),
                   e.each(n.anchors, function (e, n) {
                     t(e.els).each(function (e, o) {
                       t(o).index() === i && (r = n);
@@ -3229,7 +3223,7 @@
               if (t.maskWidth !== e) return (t.maskWidth = e), !0;
               return !1;
             })(i)
-              ? L(i)
+              ? P(i)
               : void (
                   s &&
                   (function (e) {
@@ -3243,10 +3237,10 @@
                       return (e.slidesWidth = n), !0;
                     return !1;
                   })(i) &&
-                  L(i)
+                  P(i)
                 );
         }
-        function L(e) {
+        function P(e) {
           var n = 1,
             i = 0,
             r = 0,

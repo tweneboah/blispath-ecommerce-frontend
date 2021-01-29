@@ -31,6 +31,7 @@ const formSchema = Yup.object({
   category: Yup.string().required('category is required!'),
   countInStock: Yup.string().required('Count in Stock is required!'),
   description: Yup.string().required('Count in Stock is required!'),
+  shippingCost: Yup.string().required(),
 });
 
 const AdminCreateProducts = props => {
@@ -46,6 +47,7 @@ const AdminCreateProducts = props => {
       image: [],
       colors: [],
       sizes: [],
+      shippingCost: '',
     },
     onSubmit: value => {
       const payload = {
@@ -145,6 +147,28 @@ const AdminCreateProducts = props => {
                 </div>
                 <div className='text-red-500'>
                   {formik.touched.price && formik.errors.price}
+                </div>
+              </div>
+              <div>
+                <label
+                  for='password'
+                  className='block text-sm font-medium text-gray-700'>
+                  Shipping Cost
+                </label>
+                <div className='mt-1'>
+                  <input
+                    onBlur={formik.handleBlur('shippingCost')}
+                    value={formik.values.shippingCost}
+                    onChange={formik.handleChange('shippingCost')}
+                    id='number'
+                    name='number'
+                    type='number'
+                    autocomplete='current-text'
+                    className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                  />
+                </div>
+                <div className='text-red-500'>
+                  {formik.touched.shippingCost && formik.errors.shippingCost}
                 </div>
               </div>
               <div>
@@ -334,7 +358,7 @@ const AdminCreateProducts = props => {
               {formik.values.image.length === 0 ? (
                 <button
                   disabled
-                  className='bg-red-200 block w-full py-3 text-lg cursor-not-allowed rounded-full mt-3 text-white'
+                  className='bg-red-200 block w-full py-2 text-lg cursor-not-allowed rounded-full mt-3 text-white'
                   type='submit'>
                   Please upload image to continue
                 </button>
