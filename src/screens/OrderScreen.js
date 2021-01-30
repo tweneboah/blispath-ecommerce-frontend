@@ -44,7 +44,7 @@ const OrderScreen = ({ match, history }) => {
     <Message variant='danger' />
   ) : (
     <div>
-      <p class='text-center mt-3 text-2xl font-semibold bg-red-900 text-gray-200'>
+      <p class='text-center -mt-1 text-lg p-4  font-semibold bg-gray-500 text-gray-200'>
         Keep note of your Order ID {order._id}
       </p>
       <div class='flex mt-16 h-screen flex-wrap  md:mb-0'>
@@ -130,18 +130,24 @@ const OrderScreen = ({ match, history }) => {
             </ul>
             <p>
               {order.isDelivered ? (
-                <Message variant='success'>
+                <div className='bg-green-600 py-1 font-semibold text-gray-50 text-center'>
                   Delivered on {order.deliveredAt}
-                </Message>
+                </div>
               ) : (
-                <Message variant='danger'>Not Delivered</Message>
+                <div className='bg-red-600 py-1 mb-2 font-semibold text-gray-50 text-center'>
+                  Not Delivered
+                </div>
               )}
             </p>
             <p>
               {order.isPaid ? (
-                <Message variant='success'>Paid on {order.paidAt}</Message>
+                <div className='bg-green-600 py-1 mb-2 font-semibold text-gray-50 text-center'>
+                  Paid on {order.paidAt}
+                </div>
               ) : (
-                <Message variant='danger'>Not Paid</Message>
+                <div className='bg-red-600 py-1 font-semibold mb-2 text-gray-50 text-center'>
+                  Not Paid
+                </div>
               )}
             </p>
           </div>
@@ -341,9 +347,9 @@ const OrderScreen = ({ match, history }) => {
                       <button
                         onClick={sendToPay}
                         type='button'
-                        className='btn-block'
+                        className=' bg-blue-900 p-2 inline-block w-full rounded-full text-gray-300'
                         disabled={order.cartItems === 0}>
-                        Continue to Payment
+                        Continue to Payments
                       </button>
                     ) : (
                       <button
