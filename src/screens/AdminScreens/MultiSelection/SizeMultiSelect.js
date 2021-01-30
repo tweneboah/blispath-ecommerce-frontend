@@ -21,7 +21,7 @@ const SizeMultiSelect = props => {
 
   return (
     <div style={{ margin: '1rem 0' }}>
-      <label htmlFor='color'>Size (select at least 2) </label>
+      <label htmlFor='color'>Size (select at least 1) </label>
       <Select
         id='color'
         options={sizesOption}

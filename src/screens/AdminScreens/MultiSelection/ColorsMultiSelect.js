@@ -23,7 +23,7 @@ const ColorsMultiSelect = props => {
 
   return (
     <div style={{ margin: '1rem 0' }}>
-      <label htmlFor='color'>Colors (select at least 3) </label>
+      <label htmlFor='color'>Colors (select at least 1) </label>
       <Select
         id='color'
         options={colorsOption}

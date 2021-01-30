@@ -10,7 +10,7 @@ import SizeMultiSelect from './MultiSelection/SizeMultiSelect';
 
 const formSchema = Yup.object({
   colors: Yup.array()
-    .min(3, 'Pick at least 3 tags')
+    .min(1, 'Pick at least 1 tags')
     .of(
       Yup.object().shape({
         label: Yup.string().required(),
@@ -18,11 +18,11 @@ const formSchema = Yup.object({
       })
     ),
   sizes: Yup.array()
-    .min(3, 'Pick at least 3 tags')
+    .min(1, 'Pick at least 3 tags')
     .of(
       Yup.object().shape({
-        label: Yup.string().required(),
-        value: Yup.string().required(),
+        label: Yup.string(),
+        value: Yup.string(),
       })
     ),
   name: Yup.string().required('Name is required!'),
@@ -61,6 +61,7 @@ const AdminCreateProducts = props => {
     validationSchema: formSchema,
   });
 
+  console.log(formik.values.category);
   const productCreate = useSelector(state => state.productCreate);
 
   const { loading, success, product, error } = productCreate;
@@ -289,21 +290,55 @@ const AdminCreateProducts = props => {
                 </div>
               </div>
 
-              {/* Size select */}
-              <div>
-                <div className='mt-1'>
-                  <SizeMultiSelect
-                    value={formik.values.sizes}
-                    onChange={formik.setFieldValue}
-                    onBlur={formik.setFieldTouched}
-                    error={formik.errors.sizes}
-                    touched={formik.touched.sizes}
-                  />
+              {formik.values.category === 'Fashion' ? (
+                <div>
+                  <div className='mt-1'>
+                    <SizeMultiSelect
+                      value={formik.values.sizes}
+                      onChange={formik.setFieldValue}
+                      onBlur={formik.setFieldTouched}
+                      error={formik.errors.sizes}
+                      touched={formik.touched.sizes}
+                    />
+                  </div>
+                  <div className='text-red-500'>
+                    {formik.touched.countInStock && formik.errors.countInStock}
+                  </div>
                 </div>
-                <div className='text-red-500'>
-                  {formik.touched.countInStock && formik.errors.countInStock}
+              ) : formik.values.category === 'Gents' ? (
+                <div>
+                  <div className='mt-1'>
+                    <SizeMultiSelect
+                      value={formik.values.sizes}
+                      onChange={formik.setFieldValue}
+                      onBlur={formik.setFieldTouched}
+                      error={formik.errors.sizes}
+                      touched={formik.touched.sizes}
+                    />
+                  </div>
+                  <div className='text-red-500'>
+                    {formik.touched.countInStock && formik.errors.countInStock}
+                  </div>
                 </div>
-              </div>
+              ) : formik.values.category === 'Ladies' ? (
+                <div>
+                  <div className='mt-1'>
+                    <SizeMultiSelect
+                      value={formik.values.sizes}
+                      onChange={formik.setFieldValue}
+                      onBlur={formik.setFieldTouched}
+                      error={formik.errors.sizes}
+                      touched={formik.touched.sizes}
+                    />
+                  </div>
+                  <div className='text-red-500'>
+                    {formik.touched.countInStock && formik.errors.countInStock}
+                  </div>
+                </div>
+              ) : (
+                ''
+              )}
+
               <div>
                 <label
                   for='password'
