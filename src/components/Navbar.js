@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { logoutAction } from '../redux/actions/userAction';
-import logo from '../images/blsp.png';
+import logo from '../images/logon2.png';
 import { fetchAllProductsAction } from '../redux/actions/productActions';
 
 const Header = props => {
@@ -62,7 +62,7 @@ const Header = props => {
             <div className='flex items-center'>
               <Link to='/' className='flex-shrink-0'>
                 <img
-                  className=' lg:block h-56 pt-2  w-auto'
+                  className=' lg:block h-36 pt-1 pb-1  w-auto'
                   src={logo}
                   alt='Workflow'
                 />
@@ -227,7 +227,7 @@ const Header = props => {
                               onClick={() =>
                                 setOpenProfileMenu(!openProfileMenu)
                               }
-                              to='admin/fetchproducts'
+                              to='/admin/fetchproducts'
                               className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                               role='menuitem'>
                               All Products
@@ -236,7 +236,7 @@ const Header = props => {
                               onClick={() =>
                                 setOpenProfileMenu(!openProfileMenu)
                               }
-                              to='admin/allpayments'
+                              to='/admin/allpayments'
                               className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                               role='menuitem'>
                               View All Payments
@@ -422,7 +422,6 @@ const Header = props => {
                 setOpenCategoryMenu(!openCategoryMenu),
                 setopenMobileMenu(!openMobileMenu),
               ]}
-              href='#'
               className='text-gray-300 hover:bg-yellow-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium'>
               Categories
             </a>
@@ -753,7 +752,6 @@ const Header = props => {
                   className='flow-root'>
                   <Link
                     to='/hot-deals'
-                    href='#'
                     className='-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150'>
                     <svg
                       className='flex-shrink-0 h-6 w-6 text-gray-400'
