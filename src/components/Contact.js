@@ -1,4 +1,5 @@
 import React from 'react';
+import { ChatEngine } from 'react-chat-engine';
 import contact from '../images/contact.png';
 const Contact = () => {
   return (

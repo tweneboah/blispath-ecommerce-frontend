@@ -6,7 +6,8 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProductAction } from '../../redux/actions/productActions';
 import ColorsMultiSelect from './MultiSelection/ColorsMultiSelect';
-import SizeMultiSelect from './MultiSelection/SizeMultiSelect';
+import ShoeSizeMultiSelect from './MultiSelection/ShoeSizeMultiSelect';
+import ClothingSizesMultiSelect from './MultiSelection/ClothingSizesMultiSelect';
 
 const formSchema = Yup.object({
   colors: Yup.array()
@@ -17,20 +18,17 @@ const formSchema = Yup.object({
         value: Yup.string().required(),
       })
     ),
-  sizes: Yup.array()
-    .min(1, 'Pick at least 3 tags')
-    .of(
-      Yup.object().shape({
-        label: Yup.string(),
-        value: Yup.string(),
-      })
-    ),
-  name: Yup.string().required('Name is required!'),
+
+  name: Yup.string()
+    .required('Name is required!')
+    .min(30, 'Product Title must be at least 30 characters long'),
   price: Yup.string().required('Price is required!'),
   brand: Yup.string().required('Brand is required!'),
   category: Yup.string().required('category is required!'),
   countInStock: Yup.string().required('Count in Stock is required!'),
-  description: Yup.string().required('Count in Stock is required!'),
+  description: Yup.string()
+    .required('Count in Stock is required!')
+    .min(200, 'Product Description must be at least 200 characters long'),
   shippingCost: Yup.string().required(),
 });
 
@@ -41,19 +39,21 @@ const AdminCreateProducts = props => {
       name: '',
       price: '',
       brand: '',
-      category: 'Fashion',
+      category: 'Hot deals',
       countInStock: '',
       description: '',
       image: [],
       colors: [],
-      sizes: [],
+      clothingSizes: [],
+      shoesSizes: [],
       shippingCost: '',
     },
     onSubmit: value => {
       const payload = {
         ...value,
         colors: value.colors.map(color => color.value),
-        sizes: value.sizes.map(size => size.value),
+        clothingSizes: value.clothingSizes.map(size => size.value),
+        shoesSizes: value.shoesSizes.map(size => size.value),
       };
 
       dispatch(createProductAction(payload));
@@ -61,7 +61,6 @@ const AdminCreateProducts = props => {
     validationSchema: formSchema,
   });
 
-  console.log(formik.values.category);
   const productCreate = useSelector(state => state.productCreate);
 
   const { loading, success, product, error } = productCreate;
@@ -85,11 +84,6 @@ const AdminCreateProducts = props => {
         {/* begining */}
         <div className='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
           <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-            <img
-              className='mx-auto h-12 w-auto'
-              src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
-              alt='Workflow'
-            />
             <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
               Add New Product
             </h2>
@@ -114,7 +108,7 @@ const AdminCreateProducts = props => {
                   className='block text-sm font-medium text-gray-700'>
                   Product name
                 </label>
-                <div className='mt-1'>
+                <div className='mt-1 mb-2'>
                   <input
                     onBlur={formik.handleBlur('name')}
                     value={formik.values.name}
@@ -134,7 +128,7 @@ const AdminCreateProducts = props => {
                   className='block text-sm font-medium text-gray-700'>
                   Product price
                 </label>
-                <div className='mt-1'>
+                <div className='mt-1 mb-2'>
                   <input
                     onBlur={formik.handleBlur('price')}
                     value={formik.values.price}
@@ -156,7 +150,7 @@ const AdminCreateProducts = props => {
                   className='block text-sm font-medium text-gray-700'>
                   Shipping Cost
                 </label>
-                <div className='mt-1'>
+                <div className='mt-1 mb-2'>
                   <input
                     onBlur={formik.handleBlur('shippingCost')}
                     value={formik.values.shippingCost}
@@ -178,7 +172,7 @@ const AdminCreateProducts = props => {
                   className='block text-sm font-medium text-gray-700'>
                   Product brand
                 </label>
-                <div className='mt-1'>
+                <div className='mt-1 mb-2'>
                   <input
                     onBlur={formik.handleBlur('brand')}
                     value={formik.values.brand}
@@ -193,8 +187,11 @@ const AdminCreateProducts = props => {
                 </div>
               </div>
               {/* Upload image */}
-              <div className='mt-2 sm:mt-0 sm:col-span-2'>
-                <div className='max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md'>
+              <div className='mt-4 sm:mt-0 sm:col-span-2'>
+                {formik.values.image.length > 0 && (
+                  <h2 className='text-green-600'>Image added successfully</h2>
+                )}
+                <div className='max-w-lg flex justify-center px-6 pt-5 mt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md'>
                   <div className='space-y-1 text-center'>
                     <svg
                       className='mx-auto h-12 w-12 text-gray-400'
@@ -212,7 +209,7 @@ const AdminCreateProducts = props => {
                     <div className='flex text-sm text-gray-600'>
                       <Dropzone
                         accept='image/jpeg, image/png'
-                        maxFiles={4}
+                        maxFiles={5}
                         onDrop={acceptedFiles => {
                           formik.setFieldValue(
                             'image',
@@ -237,7 +234,7 @@ const AdminCreateProducts = props => {
                       </Dropzone>
                     </div>
                     <p className='text-sm text-gray-500'>
-                      PNG, JPG, GIF minimum size 1M
+                      PNG, JPG, GIF minimum size 1M and at least 5
                     </p>
                   </div>
                 </div>
@@ -256,9 +253,6 @@ const AdminCreateProducts = props => {
                       onChange={formik.handleChange('category')}
                       name='category'
                       className='mt-1 block border w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'>
-                      <option value='Fashion'>Fashion</option>
-                      <option value='Gents'>Gents</option>
-                      <option value='Ladies'>Ladies</option>
                       <option value='Hot Deals'>Hot Deals</option>
                       <option value='Phone Accessories'>
                         Phone Accessories
@@ -267,6 +261,11 @@ const AdminCreateProducts = props => {
                         Laptops and Accessories
                       </option>
                       <option value='Home Appliances'>Home Appliances</option>
+
+                      <option value='Men Shoes'>Men Shoes</option>
+                      <option value='Men Clothings'>Men Clothings</option>
+                      <option value='Ladies Shoes'>Ladies Shoes</option>
+                      <option value='Ladies Clothings'>Ladies Clothings</option>
                     </select>
                   </div>
                 </div>
@@ -274,7 +273,7 @@ const AdminCreateProducts = props => {
                   {formik.touched.category && formik.errors.category}
                 </div>
               </div>
-              {/* Color select */}
+              {/* colors select */}
               <div>
                 <div className='mt-1'>
                   <ColorsMultiSelect
@@ -289,55 +288,92 @@ const AdminCreateProducts = props => {
                   {formik.touched.countInStock && formik.errors.countInStock}
                 </div>
               </div>
+              {/* clothingSizes select */}
+              {/* <div>
+                <div className='mt-1'>
+                  <ClothingSizesMultiSelect
+                    value={formik.values.clothingSizes}
+                    onChange={formik.setFieldValue}
+                    onBlur={formik.setFieldTouched}
+                    error={formik.errors.clothingSizes}
+                    touched={formik.touched.clothingSizes}
+                  />
+                </div>
+                <div className='text-red-500'>
+                  {formik.touched.countInStock && formik.errors.countInStock}
+                </div>
+              </div> */}
 
-              {formik.values.category === 'Fashion' ? (
+              {/* Shoes Sizes select */}
+              {formik.values.category === 'Men Shoes' && (
                 <div>
                   <div className='mt-1'>
-                    <SizeMultiSelect
-                      value={formik.values.sizes}
-                      onChange={formik.setFieldValue}
-                      onBlur={formik.setFieldTouched}
-                      error={formik.errors.sizes}
-                      touched={formik.touched.sizes}
-                    />
+                    <div className='mt-1'>
+                      <ShoeSizeMultiSelect
+                        value={formik.values.shoesSizes}
+                        onChange={formik.setFieldValue}
+                        onBlur={formik.setFieldTouched}
+                        error={formik.errors.shoesSizes}
+                        touched={formik.touched.shoesSizes}
+                      />
+                    </div>
                   </div>
                   <div className='text-red-500'>
-                    {formik.touched.countInStock && formik.errors.countInStock}
+                    {formik.touched.countInStock && formik.errors.shoesSizes}
                   </div>
                 </div>
-              ) : formik.values.category === 'Gents' ? (
-                <div>
-                  <div className='mt-1'>
-                    <SizeMultiSelect
-                      value={formik.values.sizes}
-                      onChange={formik.setFieldValue}
-                      onBlur={formik.setFieldTouched}
-                      error={formik.errors.sizes}
-                      touched={formik.touched.sizes}
-                    />
-                  </div>
-                  <div className='text-red-500'>
-                    {formik.touched.countInStock && formik.errors.countInStock}
-                  </div>
-                </div>
-              ) : formik.values.category === 'Ladies' ? (
-                <div>
-                  <div className='mt-1'>
-                    <SizeMultiSelect
-                      value={formik.values.sizes}
-                      onChange={formik.setFieldValue}
-                      onBlur={formik.setFieldTouched}
-                      error={formik.errors.sizes}
-                      touched={formik.touched.sizes}
-                    />
-                  </div>
-                  <div className='text-red-500'>
-                    {formik.touched.countInStock && formik.errors.countInStock}
-                  </div>
-                </div>
-              ) : (
-                ''
               )}
+
+              {formik.values.category === 'Ladies Shoes' && (
+                <div>
+                  <div className='mt-1'>
+                    <div className='mt-1'>
+                      <ShoeSizeMultiSelect
+                        value={formik.values.shoesSizes}
+                        onChange={formik.setFieldValue}
+                        onBlur={formik.setFieldTouched}
+                        error={formik.errors.shoesSizes}
+                        touched={formik.touched.shoesSizes}
+                      />
+                    </div>
+                  </div>
+                  <div className='text-red-500'>
+                    {formik.touched.countInStock && formik.errors.shoesSizes}
+                  </div>
+                </div>
+              )}
+              <div>
+                {formik.values.category === 'Men Clothings' && (
+                  <div className='mt-1'>
+                    <div className='mt-1'>
+                      <ClothingSizesMultiSelect
+                        value={formik.values.clothingSizes}
+                        onChange={formik.setFieldValue}
+                        onBlur={formik.setFieldTouched}
+                        error={formik.errors.clothingSizes}
+                        touched={formik.touched.clothingSizes}
+                      />
+                    </div>
+                  </div>
+                )}
+                {formik.values.category === 'Ladies Clothings' && (
+                  <div className='mt-1'>
+                    <div className='mt-1'>
+                      <ClothingSizesMultiSelect
+                        value={formik.values.clothingSizes}
+                        onChange={formik.setFieldValue}
+                        onBlur={formik.setFieldTouched}
+                        error={formik.errors.clothingSizes}
+                        touched={formik.touched.clothingSizes}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className='text-red-500'>
+                  {formik.touched.countInStock && formik.errors.clothingSizes}
+                </div>
+              </div>
 
               <div>
                 <label
@@ -368,7 +404,7 @@ const AdminCreateProducts = props => {
                 <div className='mt-1'>
                   <textarea
                     cols='20'
-                    onBlur={formik.handleBlur.description}
+                    onBlur={formik.handleBlur('description')}
                     value={formik.values.description}
                     onChange={formik.handleChange('description')}
                     id='description'
@@ -399,7 +435,7 @@ const AdminCreateProducts = props => {
                 </button>
               ) : (
                 <button
-                  className='bg-yellow-600 block w-full py-2 text-lg cursor-not-allowed rounded-full mt-3 text-white'
+                  className='bg-yellow-600 block w-full py-2 text-lg cursor-pointer rounded-full mt-3 text-white'
                   type='submit'
                   disabled={formik.isSubmitting}>
                   Submit

@@ -149,18 +149,29 @@ const AdminEditProduct = ({ history, match }) => {
                             Category
                           </label>
                           <select
-                            required
+                            onBlur={props.handleBlur('category')}
                             onChange={props.handleChange('category')}
                             name='category'
-                            class='mt-1 block border w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'>
-                            <option>Fashion</option>
-                            <option>Gents</option>
-                            <option>Ladies</option>
-                            <option>Hot Deals</option>
-                            <option>Auto Parts</option>
-                            <option>Phone Accessories</option>
-                            <option>Laptops and Accessories</option>
-                            <option>Home Appliances</option>
+                            className='mt-1 block border w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'>
+                            <option value='Hot Deals'>Hot Deals</option>
+                            <option value='Phone Accessories'>
+                              Phone Accessories
+                            </option>
+                            <option value='Laptops and Accessories'>
+                              Laptops and Accessories
+                            </option>
+                            <option value='Home Appliances'>
+                              Home Appliances
+                            </option>
+                            <option value='Home Appliances'>
+                              Home Appliances
+                            </option>
+                            <option value='Men Shoes'>Men Shoes</option>
+                            <option value='Men Clothings'>Men Clothings</option>
+                            <option value='Ladies Shoes'>Ladies Shoes</option>
+                            <option value='Ladies Clothings'>
+                              Ladies Clothings
+                            </option>
                           </select>
                         </div>
                       </div>

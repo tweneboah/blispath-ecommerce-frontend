@@ -54,6 +54,21 @@ const Header = props => {
     return;
   };
 
+  const truncateTitle = str => {
+    if (str.length > 30) {
+      return str.slice(0, 30) + '...';
+    } else {
+      return str;
+    }
+  };
+
+  const truncateDescription = str => {
+    if (str.length > 100) {
+      return str.slice(0, 100) + '...';
+    } else {
+      return str;
+    }
+  };
   return (
     <>
       <nav className='bg-gray-900'>
@@ -780,7 +795,7 @@ const Header = props => {
                   onClick={() => setOpenCategoryMenu(!openCategoryMenu)}
                   className='flow-root'>
                   <Link
-                    to='/gents'
+                    to='/ladies-shoes'
                     className='-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150'>
                     <svg
                       className='flex-shrink-0 h-6 w-6 text-gray-400'
@@ -795,7 +810,51 @@ const Header = props => {
                         d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
                       />
                     </svg>
-                    <span className='ml-4'>Gents</span>
+                    <span className='ml-4'>Ladies Shoes</span>
+                  </Link>
+                </li>
+                <li
+                  onClick={() => setOpenCategoryMenu(!openCategoryMenu)}
+                  className='flow-root'>
+                  <Link
+                    to='/ladies-clothings'
+                    className='-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150'>
+                    <svg
+                      className='flex-shrink-0 h-6 w-6 text-gray-400'
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'>
+                      <path
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                        stroke-width='2'
+                        d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                      />
+                    </svg>
+                    <span className='ml-4'>Ladies Clothings</span>
+                  </Link>
+                </li>
+                <li
+                  onClick={() => setOpenCategoryMenu(!openCategoryMenu)}
+                  className='flow-root'>
+                  <Link
+                    to='/men-shoes'
+                    className='-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150'>
+                    <svg
+                      className='flex-shrink-0 h-6 w-6 text-gray-400'
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'>
+                      <path
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                        stroke-width='2'
+                        d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                      />
+                    </svg>
+                    <span className='ml-4'>Men Shoes</span>
                   </Link>
                 </li>
 
@@ -803,16 +862,22 @@ const Header = props => {
                   onClick={() => setOpenCategoryMenu(!openCategoryMenu)}
                   className='flow-root'>
                   <Link
-                    to='/ladies'
+                    to='/men-clothings'
                     className='-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-50 transition ease-in-out duration-150'>
                     <svg
                       className='flex-shrink-0 h-6 w-6 text-gray-400'
                       xmlns='http://www.w3.org/2000/svg'
-                      viewBox='0 0 20 20'
-                      fill='currentColor'>
-                      <path d='M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z' />
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'>
+                      <path
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                        stroke-width='2'
+                        d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                      />
                     </svg>
-                    <span className='ml-4'>Ladies</span>
+                    <span className='ml-4'>Men Clothings</span>
                   </Link>
                 </li>
               </ul>
@@ -840,10 +905,10 @@ const Header = props => {
                         </div>
                         <div className='min-w-0 flex-1 sm:ml-8'>
                           <h4 className='text-base font-medium text-gray-900 truncate'>
-                            {product.name}
+                            {truncateTitle(product.name)}
                           </h4>
                           <p className='mt-1 text-sm text-gray-500'>
-                            {product.description}
+                            {truncateDescription(product.description)}
                           </p>
                         </div>
                       </Link>

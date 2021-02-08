@@ -120,7 +120,7 @@ const createProductAction = productData => async (dispatch, getState) => {
     formProductData.append('numReviews', productData.numReviews);
     formProductData.append('description', productData.description);
     formProductData.append('shippingCost', productData.shippingCost);
-    //Sizes
+    //IMAGES
     for (let i = 0; i < productData.image.length; i++) {
       formProductData.append('image', productData.image[i]);
     }
@@ -130,9 +130,14 @@ const createProductAction = productData => async (dispatch, getState) => {
       formProductData.append('colors', productData.colors[i]);
     }
 
-    //Sizes
-    for (let i = 0; i < productData.sizes.length; i++) {
-      formProductData.append('sizes', productData.sizes[i]);
+    //CLOTHING SIZES
+    for (let i = 0; i < productData.clothingSizes.length; i++) {
+      formProductData.append('clothingSizes', productData.clothingSizes[i]);
+    }
+
+    //SHOES SIZES
+    for (let i = 0; i < productData.shoesSizes.length; i++) {
+      formProductData.append('shoesSizes', productData.shoesSizes[i]);
     }
 
     const { data } = await axios.post(

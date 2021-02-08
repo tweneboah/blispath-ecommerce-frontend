@@ -92,7 +92,7 @@ const CartScreen = ({ match, location, history }) => {
   );
 
   return (
-    <div className='min-screen'>
+    <div className='h-screen'>
       <div className='mt-5 lg:flex   text-center bg-gray-200 py-2 md:block'>
         <div className='flex-2 ml-3'>
           <Link to='/'>
@@ -104,9 +104,11 @@ const CartScreen = ({ match, location, history }) => {
         <div className='flex-1 text-lg font-semibold'>Shopping Cart</div>
       </div>
       {cartItems?.length === 0 ? (
-        <Message>
-          Your cart is empty<Link>Go Back</Link>
-        </Message>
+        <div className='text-center mt-8 font-bold text-lg text-gray-600 hover:text-blue-700'>
+          <Message>
+            <Link to='/products'> Your cart is empty Go Back</Link>
+          </Message>
+        </div>
       ) : (
         <div className='flex flex-col bg-gray-300 lg:flex-row'>
           <div>
@@ -182,7 +184,15 @@ const CartScreen = ({ match, location, history }) => {
               </div>
             </div>
           </div>
+
           <div className='bg-gray-100 border md:w-full mt-6 mr-4 rounded-md h-screen ml-4 text-center flex justify-center items-center flex-col'>
+            <div className='pb-20'>
+              <h1 className='text-2xl font-semibold mb-2'> Shipping options</h1>
+              <div className='flex flex-col justify-center align-center'>
+                <p>1. Free shipping/ Sea: 35-55 days</p>
+                <p>2.Express/ Air shipping: 7-14. days (Comes with a fee)</p>
+              </div>
+            </div>
             <div className=''>
               <h2 className='capitalize text-lg font-black'>
                 Total Items ({' '}
@@ -206,17 +216,20 @@ const CartScreen = ({ match, location, history }) => {
               <div className='mt-2'>
                 <label
                   for='location'
-                  class='block text-sm font-medium text-gray-700'>
+                  class='block text-lg font-medium text-gray-700'>
                   Select shipping Type
                 </label>
                 <select
+                  className='border w-full rounded px-2'
                   onChange={e => {
                     const selectedShippingType = e.target.value;
                     setshippingType(selectedShippingType);
                   }}
                   class='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'>
-                  <option value='free'>Free</option>
-                  <option value='express'>Express</option>
+                  <option value='free'>Free shipping/ Sea: 35-55 days</option>
+                  <option value='express'>
+                    Express/ Air shipping: 7-14. days (Comes with a fee)
+                  </option>
                 </select>
               </div>
             </div>

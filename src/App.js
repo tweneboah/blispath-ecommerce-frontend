@@ -41,6 +41,11 @@ import AllProductsList from './screens/AllProductsList';
 import PaymentSuccess from './components/PaymentSuccess';
 import PrivacyAndPolicy from './components/PrivacyAndPolicy';
 import TermsAndConditions from './components/TermsAndConditions';
+import ShippingPolicy from './components/ShippingPolicy';
+import LadiesShoesCategory from './components/Categories/LadiesShoesCategory';
+import LadiesClothingsCategory from './components/Categories/LadiesClothingsCategory';
+import MenClothingsCategory from './components/Categories/MenClothingsCategory';
+import MenShoesCategories from './components/Categories/MenShoesCategories';
 
 const App = () => {
   return (
@@ -133,6 +138,19 @@ const App = () => {
           />
           <Route exact path='/admin/allpayments' component={AdminAllPayments} />
           <Route exact path='/admin/dashboard' component={AdminDasboard} />
+          <Route exact path='/shipping-policy' component={ShippingPolicy} />
+
+          {/* Categories */}
+          <Route exact path='/ladies-shoes' component={LadiesShoesCategory} />
+          <Route
+            exact
+            path='/ladies-clothings'
+            component={LadiesClothingsCategory}
+          />
+
+          <Route exact path='/men-clothings' component={MenClothingsCategory} />
+
+          <Route exact path='/men-shoes' component={MenShoesCategories} />
         </Switch>
 
         <Footer />

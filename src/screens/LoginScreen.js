@@ -42,7 +42,7 @@ const LoginScreen = ({ location, history }) => {
             <div className='min-h-1/2 bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
               <div className='sm:mx-auto sm:w-full sm:max-w-md'>
                 <h2 className='mt-6 text-center text-xl font-extrabold text-gray-100'>
-                  Lgin to your account
+                  Login to your account
                 </h2>
                 {loading && <Loading />}
                 {error && <ErrorMessage>{error}</ErrorMessage>}

@@ -20,7 +20,7 @@ const AutoPartsCategories = () => {
   const autoParts =
     products && products.filter(product => product.category === 'Auto Parts');
 
-  console.log(productList);
+  console.log(autoParts);
   return (
     <>
       <div class='relative min-h-screen bg-gray-200 pt-16 -ml-9 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8'>

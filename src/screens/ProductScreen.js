@@ -38,11 +38,15 @@ const ProductScreen = ({ match, history }) => {
   }
   //This will send to cart page but it will send the product id and qty as a query params
   const addToCartHandler = () => {
-    history.push(
-      `/cart/${match.params.id}?qty=${qty}&color=${color}&size=${size}`
-    );
+    if (size === '' && size === '') {
+      alert('Please select size and color option');
+    } else {
+      history.push(
+        `/cart/${match.params.id}?qty=${qty}&color=${color}&size=${size}`
+      );
+    }
   };
-
+  console.log('product', product);
   return (
     <>
       <Link to='/'>
@@ -76,10 +80,6 @@ const ProductScreen = ({ match, history }) => {
               <p class='mb-6 text-gray-500 leading-relaxed'>
                 {product?.description}
               </p>
-              <Ratings
-                value={product?.rating}
-                text={`${product?.numReviews} Reviews`}
-              />
             </div>
             <div class='lg:w-1/2 w-full px-4'>
               <div className='flex mb-4 mt-4 justify-around items-center bg-gray-100 rounded-full shadow-md py-3 text-lg text-gray-600'>
@@ -111,36 +111,44 @@ const ProductScreen = ({ match, history }) => {
                 )}
               </div>
 
-              {product?.category === 'Fashion' || 'Gents' ? (
-                <>
-                  <h1>Selected Color:{color ? color : 'No color selected'}</h1>
-                  <div className='flex justify-start m-2 '>
-                    {product.colors?.map(color => {
-                      console.log(color);
-                      return (
-                        <button
-                          className='cursor-pointer'
-                          onClick={() => setColor(color)}
-                          style={{
-                            backgroundColor: `${color}`,
-                            height: '22px',
-                            width: '23px',
-                            marginRight: '10px',
-                          }}></button>
-                      );
-                    })}
-                  </div>
-                </>
-              ) : (
-                ''
-              )}
+              {/* Dynamic display either color or size  base on category*/}
+              <>
+                <h1 className='font-semibold'>
+                  Selected Color:
+                  <span className='text-green-500 py-1 px-2'>
+                    {color ? color : 'No color selected'}
+                  </span>
+                </h1>
+                <div className='flex justify-start m-2 '>
+                  {product.colors?.map(color => {
+                    return (
+                      <button
+                        className='cursor-pointer bg-gray-50'
+                        onClick={() => setColor(color)}
+                        style={{
+                          backgroundColor: `${color}`,
+                          height: '22px',
+                          width: '23px',
+                          marginRight: '10px',
+                        }}></button>
+                    );
+                  })}
+                </div>
+              </>
 
-              <div className='flex justify-start flex-col'>
-                {product?.category === 'Fashion' || 'Gents' ? (
-                  <>
-                    <h1>Selected Size:{size ? size : 'No size selected'}</h1>
+              {/* product?.category */}
+              {product?.category === 'Men Clothings' && (
+                <div className='flex justify-start flex-col'>
+                  <div>
+                    <h1 className='font-semibold'>
+                      Selected Color:
+                      <span className='text-green-500 py-1 px-2'>
+                        {size ? size : 'No Size selected'}
+                      </span>
+                    </h1>
+
                     <div className='flex justify-start m-2 '>
-                      {product.sizes?.map(size => {
+                      {product.clothingSizes?.map(size => {
                         return (
                           <button
                             className='focus:bg-yellow-600 mr-4 text-lg bg-gray-300 px-2'
@@ -150,12 +158,98 @@ const ProductScreen = ({ match, history }) => {
                         );
                       })}
                     </div>
-                  </>
-                ) : (
-                  ''
-                )}
-              </div>
+                  </div>
+                </div>
+              )}
+              {product?.category === 'Ladies Shoes' && (
+                <div className='flex justify-start flex-col'>
+                  <div>
+                    <h1 className='font-semibold'>
+                      Selected Color:
+                      <span className='text-green-500 py-1 px-2'>
+                        {size ? size : 'No Size selected'}
+                      </span>
+                    </h1>
+                    <div className='flex justify-start m-2 '>
+                      {product.shoesSizes?.map(size => {
+                        return (
+                          <button
+                            className='focus:bg-yellow-600 mr-4 text-lg bg-gray-300 px-2'
+                            onClick={() => setSize(size)}>
+                            {size}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
 
+              {product?.category === 'Men Shoes' && (
+                <div className='flex justify-start flex-col'>
+                  <div>
+                    <h1>Selected Size:{size ? size : 'No size selected'}</h1>
+                    <div className='flex justify-start m-2 '>
+                      {product.shoesSizes?.map(size => {
+                        return (
+                          <button
+                            className='focus:bg-yellow-600 mr-4 text-lg bg-gray-300 px-2'
+                            onClick={() => setSize(size)}>
+                            {size}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {product?.category === 'Men Clothings' && (
+                <div className='flex justify-start flex-col'>
+                  <div>
+                    <h1 className='font-semibold'>
+                      Selected Size:
+                      <span className='text-green-500 py-1 px-2'>
+                        {size ? size : 'No Size selected'}
+                      </span>
+                    </h1>
+                    <div className='flex justify-start m-2 '>
+                      {product.clothingSizes?.map(size => {
+                        return (
+                          <button
+                            className='focus:bg-yellow-600 mr-4 text-lg bg-gray-300 px-2'
+                            onClick={() => setSize(size)}>
+                            {size}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {product?.category === 'Ladies Clothings' && (
+                <div className='flex justify-start flex-col'>
+                  <div>
+                    <h1 className='font-semibold'>
+                      Selected Size:
+                      <span className='text-green-500 py-1 px-2'>
+                        {size ? size : 'No Size selected'}
+                      </span>
+                    </h1>
+                    <div className='flex justify-start m-2 '>
+                      {product.clothingSizes?.map(size => {
+                        return (
+                          <button
+                            className='focus:bg-yellow-600 mr-4 text-lg bg-gray-300 px-2'
+                            onClick={() => setSize(size)}>
+                            {size}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
               <div className='flex justify-around'>
                 <button
                   onClick={addToCartHandler}

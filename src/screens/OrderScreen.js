@@ -15,7 +15,6 @@ const OrderScreen = ({ match, history }) => {
   const orderDetails = useSelector(state => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
-  console.log(order);
   useEffect(() => {
     if (!order || order._id !== match.params.id) {
       dispatch(getOrderDetailsActon(match.params.id));
