@@ -38,13 +38,17 @@ const ProductScreen = ({ match, history }) => {
   }
   //This will send to cart page but it will send the product id and qty as a query params
   const addToCartHandler = () => {
-    if (size === '' && size === '') {
-      alert('Please select size and color option');
-    } else {
-      history.push(
-        `/cart/${match.params.id}?qty=${qty}&color=${color}&size=${size}`
-      );
-    }
+    // if (size === '' && size === '') {
+    //   alert('Please select size and color option');
+    // } else {
+    //   history.push(
+    //     `/cart/${match.params.id}?qty=${qty}&color=${color}&size=${size}`
+    //   );
+    // }
+
+    history.push(
+      `/cart/${match.params.id}?qty=${qty}&color=${color}&size=${size}`
+    );
   };
   console.log('product', product);
   return (
